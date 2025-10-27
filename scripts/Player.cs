@@ -1,16 +1,26 @@
 using Godot;
 using System;
+using static System.Net.Mime.MediaTypeNames;
 
 public partial class Player : CharacterBody2D
 {
+	//veci pro pohyb
 	[Export] public int Speed = 150;
 	private AnimatedSprite2D sprite;
-	
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
+
+    //zivoty
+    [Export] public int MaxHP = 100;
+    public int CurrentHP;
+
+	//
+    public override void _Ready()
 	{
 		sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-	}
+
+		//nastaveni zivotu
+        CurrentHP = MaxHP;
+        UpdateHUD();
+    }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta)
@@ -65,4 +75,22 @@ public partial class Player : CharacterBody2D
 			}
 		}
 	}
+
+    public void TakeDamage(int amount)
+    {
+        CurrentHP -= amount;
+        if (CurrentHP < 0) CurrentHP = 0;
+        UpdateHUD();
+
+        if (CurrentHP == 0)
+        {
+            GD.Print("Player died!");
+        }
+    }
+
+    private void UpdateHUD()
+    {
+        var hud = GetTree().GetRoot().GetNode<HUD>("Main/HUD");
+        hud.SetHP(CurrentHP,MaxHP);
+    }
 }

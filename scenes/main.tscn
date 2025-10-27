@@ -6,10 +6,10 @@
 
 [node name="Main" type="Node2D"]
 
+[node name="HUD" parent="." instance=ExtResource("2_0wfyh")]
+
 [node name="Player" parent="." instance=ExtResource("1_o5qli")]
 position = Vector2(248, 283)
-
-[node name="CanvasLayer" parent="." instance=ExtResource("2_0wfyh")]
 
 [node name="Zombie" parent="." instance=ExtResource("3_sugp2")]
 position = Vector2(574, 481)

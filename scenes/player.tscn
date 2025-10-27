@@ -166,7 +166,9 @@ animations = [{
 size = Vector2(20, 24)
 
 [node name="Player" type="CharacterBody2D"]
+collision_mask = 4
 script = ExtResource("1_g2els")
+MaxHP = 110
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_60mlk")

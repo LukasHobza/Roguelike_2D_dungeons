@@ -1,7 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://bd61n8ptqpbti"]
+[gd_scene load_steps=12 format=3 uid="uid://bd61n8ptqpbti"]
 
 [ext_resource type="Texture2D" uid="uid://cbskdcxufo13s" path="res://assets/enemy/zombie.png" id="1_1vlb3"]
-[ext_resource type="Script" uid="uid://bdk1clnengrq0" path="res://scenes/Zombie.cs" id="1_httt1"]
+[ext_resource type="Script" uid="uid://bdk1clnengrq0" path="res://scripts/Zombie.cs" id="1_httt1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_httt1"]
 atlas = ExtResource("1_1vlb3")
@@ -66,7 +66,12 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3fthk"]
 size = Vector2(15, 24)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_httt1"]
+size = Vector2(24, 32)
+
 [node name="Zombie" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 4
 script = ExtResource("1_httt1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -77,3 +82,11 @@ frame_progress = 0.6255879
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_3fthk")
+
+[node name="AttackArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_httt1")
+
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
