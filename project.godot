@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Roguelike_2D_dungeons"
-run/main_scene="uid://bdkxsrwiqt0js"
+run/main_scene="uid://ogrhiy2klp65"
 config/features=PackedStringArray("4.5", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -24,6 +24,7 @@ project/assembly_name="Roguelike_2D_dungeons"
 folder_colors={
 "res://assets/": "red",
 "res://assets/player/": "green",
+"res://fonts/": "gray",
 "res://scenes/": "pink",
 "res://scripts/": "blue"
 }
