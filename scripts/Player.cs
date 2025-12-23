@@ -189,7 +189,7 @@ public partial class Player : CharacterBody2D
 
     private void UpdateHUD()
     {
-        var hud = GetTree().GetRoot().GetNode<HUD>("Main/HUD");
+        var hud = GetTree().GetRoot().GetNode<HUD>("Main/UI/HUD");
         hud.SetHP(CurrentHP,MaxHP);
     }
 }

@@ -1,0 +1,330 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhhdotdnkds7e"]
+
+[ext_resource type="Script" uid="uid://1qft21fklffx" path="res://scripts/Inventory.cs" id="1_qw0r6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hj2ta"]
+bg_color = Color(0.22745098, 0.22745098, 0.22745098, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.101960786, 0.101960786, 0.101960786, 1)
+
+[node name="Inventory" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qw0r6")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InventoryPanel" type="Panel" parent="CenterContainer"]
+custom_minimum_size = Vector2(400, 300)
+layout_mode = 2
+
+[node name="Grid" type="GridContainer" parent="CenterContainer/InventoryPanel"]
+custom_minimum_size = Vector2(320, 240)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+columns = 4
+
+[node name="Slot1" type="Panel" parent="CenterContainer/InventoryPanel/Grid"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hj2ta")
+
+[node name="Icon" type="TextureRect" parent="CenterContainer/InventoryPanel/Grid/Slot1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="Slot2" type="Panel" parent="CenterContainer/InventoryPanel/Grid"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hj2ta")
+
+[node name="Icon" type="TextureRect" parent="CenterContainer/InventoryPanel/Grid/Slot2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="Slot3" type="Panel" parent="CenterContainer/InventoryPanel/Grid"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hj2ta")
+
+[node name="Icon" type="TextureRect" parent="CenterContainer/InventoryPanel/Grid/Slot3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="Slot4" type="Panel" parent="CenterContainer/InventoryPanel/Grid"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hj2ta")
+
+[node name="Icon" type="TextureRect" parent="CenterContainer/InventoryPanel/Grid/Slot4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="Slot5" type="Panel" parent="CenterContainer/InventoryPanel/Grid"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hj2ta")
+
+[node name="Icon" type="TextureRect" parent="CenterContainer/InventoryPanel/Grid/Slot5"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="Slot6" type="Panel" parent="CenterContainer/InventoryPanel/Grid"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hj2ta")
+
+[node name="Icon" type="TextureRect" parent="CenterContainer/InventoryPanel/Grid/Slot6"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="Slot7" type="Panel" parent="CenterContainer/InventoryPanel/Grid"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hj2ta")
+
+[node name="Icon" type="TextureRect" parent="CenterContainer/InventoryPanel/Grid/Slot7"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="Slot8" type="Panel" parent="CenterContainer/InventoryPanel/Grid"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hj2ta")
+
+[node name="Icon" type="TextureRect" parent="CenterContainer/InventoryPanel/Grid/Slot8"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="Slot9" type="Panel" parent="CenterContainer/InventoryPanel/Grid"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hj2ta")
+
+[node name="Icon" type="TextureRect" parent="CenterContainer/InventoryPanel/Grid/Slot9"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="Slot10" type="Panel" parent="CenterContainer/InventoryPanel/Grid"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hj2ta")
+
+[node name="Icon" type="TextureRect" parent="CenterContainer/InventoryPanel/Grid/Slot10"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="Slot11" type="Panel" parent="CenterContainer/InventoryPanel/Grid"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hj2ta")
+
+[node name="Icon" type="TextureRect" parent="CenterContainer/InventoryPanel/Grid/Slot11"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="Slot12" type="Panel" parent="CenterContainer/InventoryPanel/Grid"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hj2ta")
+
+[node name="Icon" type="TextureRect" parent="CenterContainer/InventoryPanel/Grid/Slot12"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="Slot13" type="Panel" parent="CenterContainer/InventoryPanel/Grid"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hj2ta")
+
+[node name="Icon" type="TextureRect" parent="CenterContainer/InventoryPanel/Grid/Slot13"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="Slot14" type="Panel" parent="CenterContainer/InventoryPanel/Grid"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hj2ta")
+
+[node name="Icon" type="TextureRect" parent="CenterContainer/InventoryPanel/Grid/Slot14"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="Slot15" type="Panel" parent="CenterContainer/InventoryPanel/Grid"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hj2ta")
+
+[node name="Icon" type="TextureRect" parent="CenterContainer/InventoryPanel/Grid/Slot15"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="Slot16" type="Panel" parent="CenterContainer/InventoryPanel/Grid"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hj2ta")
+
+[node name="Icon" type="TextureRect" parent="CenterContainer/InventoryPanel/Grid/Slot16"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="Slot17" type="Panel" parent="CenterContainer/InventoryPanel/Grid"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hj2ta")
+
+[node name="Icon" type="TextureRect" parent="CenterContainer/InventoryPanel/Grid/Slot17"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="Slot18" type="Panel" parent="CenterContainer/InventoryPanel/Grid"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hj2ta")
+
+[node name="Icon" type="TextureRect" parent="CenterContainer/InventoryPanel/Grid/Slot18"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="Slot19" type="Panel" parent="CenterContainer/InventoryPanel/Grid"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hj2ta")
+
+[node name="Icon" type="TextureRect" parent="CenterContainer/InventoryPanel/Grid/Slot19"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="Slot20" type="Panel" parent="CenterContainer/InventoryPanel/Grid"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hj2ta")
+
+[node name="Icon" type="TextureRect" parent="CenterContainer/InventoryPanel/Grid/Slot20"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
