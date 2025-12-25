@@ -1,7 +1,15 @@
-[gd_scene load_steps=12 format=3 uid="uid://bd61n8ptqpbti"]
+[gd_scene load_steps=15 format=3 uid="uid://bd61n8ptqpbti"]
 
 [ext_resource type="Texture2D" uid="uid://cbskdcxufo13s" path="res://assets/enemy/zombie.png" id="1_1vlb3"]
 [ext_resource type="Script" uid="uid://bdk1clnengrq0" path="res://scripts/Zombie.cs" id="1_httt1"]
+[ext_resource type="Texture2D" uid="uid://ds8hbqxkl53q" path="res://assets/weapons/iron_sword.png" id="2_siap5"]
+[ext_resource type="Script" uid="uid://b8fb6agr5q4uf" path="res://scripts/items/Weapon.cs" id="3_e4xys"]
+
+[sub_resource type="Resource" id="Resource_m83i4"]
+script = ExtResource("3_e4xys")
+ItemName = "mec"
+Icon = ExtResource("2_siap5")
+metadata/_custom_type_script = "uid://b8fb6agr5q4uf"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_httt1"]
 atlas = ExtResource("1_1vlb3")
@@ -73,6 +81,7 @@ size = Vector2(24, 32)
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_httt1")
+PossibleDrops = Array[Object]([SubResource("Resource_m83i4")])
 Speed = 30
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

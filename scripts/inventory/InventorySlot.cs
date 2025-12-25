@@ -8,24 +8,27 @@ public partial class InventorySlot : Panel
     public override void _Ready()
     {
         icon = GetNode<TextureRect>("Icon");
-        UpdateSlot();
+        Clear();
     }
 
+    //Nastavení itemu do slotu
     public void SetItem(Item item)
     {
         Item = item;
         UpdateSlot();
     }
 
+    //Vymazání slotu
     public void Clear()
     {
         Item = null;
         UpdateSlot();
     }
 
+    //Aktualizace UI
     private void UpdateSlot()
     {
-        if (Item != null)
+        if (Item != null && Item.Icon != null)
         {
             icon.Texture = Item.Icon;
             icon.Visible = true;
@@ -37,11 +40,13 @@ public partial class InventorySlot : Panel
         }
     }
 
+    //Kontrola, jestli je slot prázdný
     public bool IsEmpty()
     {
         return Item == null;
     }
 
+    //Kliknutí myší na slot
     public override void _GuiInput(InputEvent @event)
     {
         if (@event is InputEventMouseButton mouseEvent &&
@@ -52,6 +57,7 @@ public partial class InventorySlot : Panel
         }
     }
 
+    //Použití itemu
     private void UseItem()
     {
         if (Item == null) return;
@@ -62,12 +68,12 @@ public partial class InventorySlot : Panel
         if (Item is Potion potion)
         {
             player.Heal(potion.HealAmount);
-            Clear(); // item se odebere
+            Clear(); // potion se spotřebuje
         }
         else if (Item is Weapon weapon)
         {
             player.EquipWeapon(weapon);
-            // item zustane v invu
+            // zbran zůstává v inventáři
         }
     }
 }

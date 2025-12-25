@@ -15,15 +15,15 @@
 
 [node name="Inventory" parent="UI" groups=["inventory"] instance=ExtResource("4_rarhs")]
 
-[node name="Zombie" parent="." instance=ExtResource("3_vcsgt")]
-position = Vector2(452, 395)
-
-[node name="Zombie2" parent="." instance=ExtResource("3_vcsgt")]
-position = Vector2(46, 253)
-
 [node name="Player" parent="." groups=["player"] instance=ExtResource("2_rarhs")]
 position = Vector2(248, 283)
 
 [node name="ItemPickup" parent="." instance=ExtResource("5_c01mt")]
 position = Vector2(204, 360)
 ItemData = ExtResource("6_nxtc6")
+Item = ExtResource("6_nxtc6")
+
+[node name="Zombie" parent="." instance=ExtResource("3_vcsgt")]
+position = Vector2(106, 280)
+PossibleDrops = Array[Object]([ExtResource("6_nxtc6")])
+DropChance = 1.0
