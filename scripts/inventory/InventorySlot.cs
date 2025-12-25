@@ -41,4 +41,33 @@ public partial class InventorySlot : Panel
     {
         return Item == null;
     }
+
+    public override void _GuiInput(InputEvent @event)
+    {
+        if (@event is InputEventMouseButton mouseEvent &&
+            mouseEvent.Pressed &&
+            mouseEvent.ButtonIndex == MouseButton.Left)
+        {
+            UseItem();
+        }
+    }
+
+    private void UseItem()
+    {
+        if (Item == null) return;
+
+        var player = GetTree().GetFirstNodeInGroup("player") as Player;
+        if (player == null) return;
+
+        if (Item is Potion potion)
+        {
+            player.Heal(potion.HealAmount);
+            Clear(); // item se odebere
+        }
+        else if (Item is Weapon weapon)
+        {
+            player.EquipWeapon(weapon);
+            // item zustane v invu
+        }
+    }
 }

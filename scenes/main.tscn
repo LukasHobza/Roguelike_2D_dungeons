@@ -21,7 +21,7 @@ position = Vector2(452, 395)
 [node name="Zombie2" parent="." instance=ExtResource("3_vcsgt")]
 position = Vector2(46, 253)
 
-[node name="Player" parent="." instance=ExtResource("2_rarhs")]
+[node name="Player" parent="." groups=["player"] instance=ExtResource("2_rarhs")]
 position = Vector2(248, 283)
 
 [node name="ItemPickup" parent="." instance=ExtResource("5_c01mt")]

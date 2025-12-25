@@ -16,7 +16,10 @@ public partial class Player : CharacterBody2D
     public int CurrentHP;
 
     //damage
-    [Export] public int AttackDamage = 15;
+    [Export] public int BaseDamage = 15;
+    public int Damage;
+    public Weapon EquippedWeapon;
+
     private Sprite2D weapon;
     private Area2D attackArea;
     private bool isAttacking = false;
@@ -35,6 +38,9 @@ public partial class Player : CharacterBody2D
         attackArea.Monitoring = false;//Objekt aktivně sleduje kolize / vstupy
 
         sprite.Play("idle_right");
+
+        Damage = BaseDamage;
+
         //nastaveni zivotu
         CurrentHP = MaxHP;
         UpdateHUD();
@@ -116,8 +122,8 @@ public partial class Player : CharacterBody2D
     {
         if (body is Enemy enemy)
         {
-            enemy.TakeDamage(AttackDamage);
-            GD.Print($"Player dealt {AttackDamage} damage to {enemy.GetType().Name}!");
+            enemy.TakeDamage(Damage);
+            GD.Print($"Player dealt {Damage} damage to {enemy.GetType().Name}!");
         }
     }
 
@@ -195,5 +201,18 @@ public partial class Player : CharacterBody2D
     {
         var hud = GetTree().GetRoot().GetNode<HUD>("Main/UI/HUD");
         hud.SetHP(CurrentHP,MaxHP);
+    }
+
+    public void Heal(int amount)
+    {
+        CurrentHP = Mathf.Min(CurrentHP + amount, MaxHP);
+        UpdateHUD();
+    }
+
+    public void EquipWeapon(Weapon weapon)
+    {
+        EquippedWeapon = weapon;
+        Damage = BaseDamage + weapon.Damage;
+        GD.Print("Equipped weapon, damage:", Damage);
     }
 }
