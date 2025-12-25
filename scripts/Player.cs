@@ -4,8 +4,10 @@ using static System.Net.Mime.MediaTypeNames;
 
 public partial class Player : CharacterBody2D
 {
-	//veci pro pohyb
-	[Export] public int Speed = 100;
+    public Inventory Inventory;
+
+    //veci pro pohyb
+    [Export] public int Speed = 100;
 	private AnimatedSprite2D sprite;
     private string previousAnimation = "walk_right";
 
@@ -23,6 +25,8 @@ public partial class Player : CharacterBody2D
     //
     public override void _Ready()
 	{
+        Inventory = GetTree().GetFirstNodeInGroup("inventory") as Inventory;
+
         sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
         weapon = GetNode<Sprite2D>("Weapon");
         attackArea = GetNode<Area2D>("AttackArea");

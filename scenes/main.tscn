@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://bdkxsrwiqt0js"]
+[gd_scene load_steps=7 format=3 uid="uid://bdkxsrwiqt0js"]
 
 [ext_resource type="PackedScene" uid="uid://crnmvaosaonq6" path="res://scenes/HUD.tscn" id="1_0bbpv"]
 [ext_resource type="PackedScene" uid="uid://c8irxjv7nr6e2" path="res://scenes/Player.tscn" id="2_rarhs"]
 [ext_resource type="PackedScene" uid="uid://bd61n8ptqpbti" path="res://scenes/Zombie.tscn" id="3_vcsgt"]
 [ext_resource type="PackedScene" uid="uid://bhhdotdnkds7e" path="res://scenes/inventory.tscn" id="4_rarhs"]
+[ext_resource type="PackedScene" uid="uid://b6rs6sp4i2m4v" path="res://scenes/item_pickup.tscn" id="5_c01mt"]
+[ext_resource type="Resource" uid="uid://cooga7k00c5cd" path="res://items/TestSword.tres" id="6_nxtc6"]
 
 [node name="Main" type="Node2D"]
 
@@ -11,7 +13,7 @@
 
 [node name="HUD" parent="UI" instance=ExtResource("1_0bbpv")]
 
-[node name="Inventory" parent="UI" instance=ExtResource("4_rarhs")]
+[node name="Inventory" parent="UI" groups=["inventory"] instance=ExtResource("4_rarhs")]
 
 [node name="Zombie" parent="." instance=ExtResource("3_vcsgt")]
 position = Vector2(452, 395)
@@ -21,3 +23,7 @@ position = Vector2(46, 253)
 
 [node name="Player" parent="." instance=ExtResource("2_rarhs")]
 position = Vector2(248, 283)
+
+[node name="ItemPickup" parent="." instance=ExtResource("5_c01mt")]
+position = Vector2(204, 360)
+ItemData = ExtResource("6_nxtc6")
