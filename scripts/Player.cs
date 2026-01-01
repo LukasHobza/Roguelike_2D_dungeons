@@ -14,6 +14,9 @@ public partial class Player : CharacterBody2D
     //zivoty
     [Export] public int MaxHP = 100;
     public int CurrentHP;
+    public int Defence = 0;
+    public int BaseDefence = 0;
+    public Armor EquippedArmor;
 
     //damage
     [Export] public int BaseDamage = 15;
@@ -187,7 +190,8 @@ public partial class Player : CharacterBody2D
 
     public void TakeDamage(int amount)
     {
-        CurrentHP -= amount;
+        int damage = Mathf.Max(amount - Defence, 0);
+        CurrentHP -= damage;
         if (CurrentHP < 0) CurrentHP = 0;
         UpdateHUD();
 
@@ -205,7 +209,7 @@ public partial class Player : CharacterBody2D
 
     public void Heal(int amount)
     {
-        CurrentHP = Mathf.Min(CurrentHP + amount, MaxHP);
+        CurrentHP = Mathf.Min(CurrentHP + amount, MaxHP);//Mathf.Min() aby hp nebylo vice nez maximum
         UpdateHUD();
     }
 
@@ -214,5 +218,26 @@ public partial class Player : CharacterBody2D
         EquippedWeapon = weapon;
         Damage = BaseDamage + weapon.Damage;
         GD.Print("Equipped weapon, damage:", Damage);
+    }
+
+    public void UnequipWeapon()
+    {
+        EquippedWeapon = null;
+        Damage = BaseDamage;
+        GD.Print("Weapon unequipped, damage reset to ", Damage);
+    }
+
+    public void EquipArmor(Armor armor)
+    {
+        EquippedArmor = armor;
+        Defence = BaseDefence + armor.Defense;
+        GD.Print("Equipped armor, defence:", Defence);
+    }
+
+    public void UnequipArmor()
+    {
+        EquippedArmor = null;
+        Defence = BaseDefence;
+        GD.Print("Armor unequipped, Defence reset to ", Defence);
     }
 }

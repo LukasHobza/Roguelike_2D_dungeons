@@ -49,12 +49,59 @@ public partial class InventorySlot : Panel
     //Kliknutí myší na slot
     public override void _GuiInput(InputEvent @event)
     {
-        if (@event is InputEventMouseButton mouseEvent &&
-            mouseEvent.Pressed &&
-            mouseEvent.ButtonIndex == MouseButton.Left)
+        if (@event is InputEventMouseButton mouseEvent && mouseEvent.Pressed)
         {
-            UseItem();
+            if (mouseEvent.ButtonIndex == MouseButton.Left)
+            {
+                UseItem();
+            }
+            else if (mouseEvent.ButtonIndex == MouseButton.Right)
+            {
+                DropItem();
+            }
         }
+    }
+
+    private void DropItem()
+    {
+        if (Item == null) return;
+
+        var player = GetTree().GetFirstNodeInGroup("player") as Player;
+        if (player == null) return;
+
+        // Pokud je to equipnutá zbraň  unequip
+        if (Item is Weapon weapon)
+        {
+            if (player.EquippedWeapon == weapon)
+            {
+                player.UnequipWeapon();
+            }
+        }
+        else if (Item is Armor armor)
+        {
+            if (player.EquippedArmor == armor)
+            {
+                player.UnequipArmor();
+            }
+        }
+
+
+
+        SpawnPickup(Item);
+        Clear();
+    }
+
+    private void SpawnPickup(Item item)
+    {
+        var pickupScene = GD.Load<PackedScene>("res://scenes/item_pickup.tscn");
+        var pickup = pickupScene.Instantiate<ItemPickup>();
+
+        pickup.ItemData = item;
+
+        var player = GetTree().GetFirstNodeInGroup("player") as Player;
+        pickup.GlobalPosition = player.GlobalPosition + new Vector2(0, 32);
+
+        GetTree().CurrentScene.AddChild(pickup);
     }
 
     //Použití itemu
@@ -74,6 +121,11 @@ public partial class InventorySlot : Panel
         {
             player.EquipWeapon(weapon);
             // zbran zůstává v inventáři
+        }
+        else if (Item is Armor armor)
+        {
+            player.EquipArmor(armor);
+            // armor zůstává v inventáři
         }
     }
 }

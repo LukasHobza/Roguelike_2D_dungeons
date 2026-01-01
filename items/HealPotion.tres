@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Potion" load_steps=3 format=3 uid="uid://cwx4liu6xoj1b"]
+
+[ext_resource type="Texture2D" uid="uid://bcyie3ocj1qb2" path="res://assets/potions/heal_potion.png" id="1_kylyw"]
+[ext_resource type="Script" uid="uid://bbjtwk6vsp1op" path="res://scripts/items/Potion.cs" id="1_yfies"]
+
+[resource]
+script = ExtResource("1_yfies")
+ItemName = "Heal Potion"
+Icon = ExtResource("1_kylyw")
+metadata/_custom_type_script = "uid://bbjtwk6vsp1op"
