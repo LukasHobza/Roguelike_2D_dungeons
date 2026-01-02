@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://df2gmmmdw8khh"]
+
+[ext_resource type="Texture2D" uid="uid://btfslevjbatom" path="res://assets/weapons/iron_axe.png" id="1_a7adg"]
+[ext_resource type="Script" uid="uid://b8fb6agr5q4uf" path="res://scripts/items/Weapon.cs" id="1_q2711"]
+
+[resource]
+script = ExtResource("1_q2711")
+Damage = 9
+ItemName = "Iron axe"
+Icon = ExtResource("1_a7adg")
+metadata/_custom_type_script = "uid://b8fb6agr5q4uf"

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Armor" load_steps=3 format=3 uid="uid://18dnr5oxwu47"]
+
+[ext_resource type="Texture2D" uid="uid://cgeurxkdu0552" path="res://assets/armor/diamond_chestplate.png" id="1_pquhe"]
+[ext_resource type="Script" uid="uid://b6rol5my80uy4" path="res://scripts/items/Armor.cs" id="1_sq50w"]
+
+[resource]
+script = ExtResource("1_sq50w")
+Defense = 10
+ItemName = "Diamond chestplate"
+Icon = ExtResource("1_pquhe")
+metadata/_custom_type_script = "uid://b6rol5my80uy4"

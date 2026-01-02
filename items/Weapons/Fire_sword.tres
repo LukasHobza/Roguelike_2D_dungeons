@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://c7xp1dr0ir85u"]
+
+[ext_resource type="Script" uid="uid://b8fb6agr5q4uf" path="res://scripts/items/Weapon.cs" id="1_fkc1e"]
+[ext_resource type="Texture2D" uid="uid://dyhdm16a3eckf" path="res://assets/weapons/fire_sword.png" id="1_q1beo"]
+
+[resource]
+script = ExtResource("1_fkc1e")
+Damage = 15
+ItemName = "Fire sword"
+Icon = ExtResource("1_q1beo")
+metadata/_custom_type_script = "uid://b8fb6agr5q4uf"

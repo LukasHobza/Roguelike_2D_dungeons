@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://b6rs6sp4i2m4v"]
+[gd_scene load_steps=5 format=3 uid="uid://b6rs6sp4i2m4v"]
 
 [ext_resource type="Script" uid="uid://co2pccv5ib7yl" path="res://scripts/items/ItemPickup.cs" id="1_lgqak"]
-[ext_resource type="Texture2D" uid="uid://ds8hbqxkl53q" path="res://assets/weapons/iron_sword.png" id="2_yiukj"]
+[ext_resource type="Resource" uid="uid://03j7ewnjksu8" path="res://items/Weapons/Iron_sword.tres" id="2_72sof"]
+[ext_resource type="Texture2D" uid="uid://c385rijflovhk" path="res://assets/weapons/iron_sword.png" id="2_yiukj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yiukj"]
 radius = 14.035668
@@ -9,6 +10,7 @@ radius = 14.035668
 [node name="ItemPickup" type="Area2D"]
 collision_layer = 2
 script = ExtResource("1_lgqak")
+ItemData = ExtResource("2_72sof")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_yiukj")

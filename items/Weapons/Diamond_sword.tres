@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://cy5f1jnqiidlu"]
+
+[ext_resource type="Script" uid="uid://b8fb6agr5q4uf" path="res://scripts/items/Weapon.cs" id="1_6inl6"]
+[ext_resource type="Texture2D" uid="uid://bcsru76lut8hj" path="res://assets/weapons/diamond_sword.png" id="1_bewrk"]
+
+[resource]
+script = ExtResource("1_6inl6")
+Damage = 10
+ItemName = "Diamond sword"
+Icon = ExtResource("1_bewrk")
+metadata/_custom_type_script = "uid://b8fb6agr5q4uf"
