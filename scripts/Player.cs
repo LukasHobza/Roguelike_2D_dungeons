@@ -4,6 +4,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 public partial class Player : CharacterBody2D
 {
+    public int Gold { get; private set; }
     public Inventory Inventory;
 
     //veci pro pohyb
@@ -31,6 +32,10 @@ public partial class Player : CharacterBody2D
     //
     public override void _Ready()
 	{
+        var db = GetNode<GameDatabase>("/root/GameDatabase");
+        Gold = db.LoadGold();
+        GD.Print("Loaded gold: ", Gold);
+
         Inventory = GetTree().GetFirstNodeInGroup("inventory") as Inventory;
 
         sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
@@ -46,6 +51,16 @@ public partial class Player : CharacterBody2D
 
         //nastaveni zivotu
         CurrentHP = MaxHP;
+        UpdateHUD();
+    }
+
+    public void AddGold(int amount)
+    {
+        Gold += amount;
+        var db = GetNode<GameDatabase>("/root/GameDatabase");
+        db.SaveGold(Gold);
+        GD.Print("Gold: ", Gold);
+
         UpdateHUD();
     }
 
@@ -205,6 +220,7 @@ public partial class Player : CharacterBody2D
     {
         var hud = GetTree().GetRoot().GetNode<HUD>("Main/UI/HUD");
         hud.SetHP(CurrentHP,MaxHP);
+        hud.SetGold(Gold);
     }
 
     public void Heal(int amount)

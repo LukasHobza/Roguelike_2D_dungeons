@@ -15,6 +15,10 @@ run/main_scene="uid://ogrhiy2klp65"
 config/features=PackedStringArray("4.5", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameDatabase="*res://scripts/GameDatabase.cs"
+
 [display]
 
 window/subwindows/embed_subwindows=false
@@ -29,6 +33,7 @@ folder_colors={
 "res://assets/": "red",
 "res://assets/player/": "green",
 "res://assets/weapons/": "blue",
+"res://database/": "purple",
 "res://fonts/": "gray",
 "res://scenes/": "pink",
 "res://scripts/": "blue"

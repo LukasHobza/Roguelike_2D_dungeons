@@ -84,6 +84,13 @@ public partial class Enemy : CharacterBody2D
 
     protected virtual void Die()
     {
+        var player = GetTree().GetFirstNodeInGroup("player") as Player;
+        if (player != null)
+        {
+            player.AddGold(1);
+        }
+
+
         GD.Print($"{GetType().Name} died!");
         QueueFree();
     }
