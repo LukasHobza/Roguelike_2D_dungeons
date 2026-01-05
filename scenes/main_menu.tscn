@@ -44,6 +44,10 @@ text = "*nazev hry*"
 layout_mode = 2
 text = "Hrát"
 
+[node name="ButtonSettings" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Nastavení"
+
 [node name="ButtonQuit" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 text = "Zavřít"

@@ -9,10 +9,12 @@ public partial class MainMenu : Control
 		//tlacitka
         var ButtonStart = GetNode<Button>("CenterContainer/VBoxContainer/ButtonPlay");
         var ButtonQuit = GetNode<Button>("CenterContainer/VBoxContainer/ButtonQuit");
+        var ButtonSettings = GetNode<Button>("CenterContainer/VBoxContainer/ButtonSettings");
 
         //bude volat tuto fci po kliknuti
         ButtonStart.Pressed += OnStartPressed;
         ButtonQuit.Pressed += OnQuitPressed;
+        ButtonSettings.Pressed += OnSettingsPressed;
     }
 
     private void OnStartPressed()
@@ -20,6 +22,13 @@ public partial class MainMenu : Control
         GD.Print("play");
         //nacte hlavni scenu hry
         GetTree().ChangeSceneToFile("res://scenes/Main.tscn");
+    }
+
+    private void OnSettingsPressed()
+    {
+        GD.Print("settings");
+        //nacte hlavni scenu hry
+        GetTree().ChangeSceneToFile("res://scenes/Settings.tscn");
     }
 
     private void OnQuitPressed()
