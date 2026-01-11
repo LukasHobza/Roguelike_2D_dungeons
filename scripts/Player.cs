@@ -67,74 +67,74 @@ public partial class Player : CharacterBody2D
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _PhysicsProcess(double delta)
     {
-        if (isAttacking) return;
+        // --- INPUT ---
+        Vector2 input = Input.GetVector(
+            "move_left",
+            "move_right",
+            "move_up",
+            "move_down"
+        );
 
-        //veci pro pohyb hrace
-        Vector2 velocity = Vector2.Zero;
-
-		//pohyb
-		if (Input.IsActionPressed("move_right"))
-			velocity.X += 1;
-		if (Input.IsActionPressed("move_left"))
-			velocity.X -= 1;
-		if (Input.IsActionPressed("move_down"))
-			velocity.Y += 1;
-		if (Input.IsActionPressed("move_up"))
-			velocity.Y -= 1;
-		
-		//vertikalni pohyb nebude rychlejsi
-		Velocity = velocity.Normalized() * Speed;
-		MoveAndSlide();
-		
-		string currentAnim = sprite.Animation.ToString();
-		if (velocity.Length() == 0)
-		{
-			//idle animace
-			if (currentAnim.Contains("walk"))
-			{
-				if (currentAnim.Contains("up"))
-					sprite.Play("idle_up");
-				else if (currentAnim.Contains("down"))
-					sprite.Play("idle_down");
-				else
-					sprite.Play("idle_right");
-			}
-		}
-		else
-		{
-			//walk animace
-			if (Math.Abs(velocity.X) > Math.Abs(velocity.Y))
-			{
-				sprite.Play("walk_right");
-				sprite.FlipH = velocity.X < 0;
-			}
-			else if (velocity.Y < 0)
-			{
-				sprite.Play("walk_up");
-				sprite.FlipH = false;
-			}
-			else
-			{
-				sprite.Play("walk_down");
-				sprite.FlipH = false;
-			}
-		}
-
-        //veci pro utoceni hrace
-        Vector2 input = Input.GetVector("move_left", "move_right", "move_up", "move_down");
-        
-        if (!isAttacking)
+        // --- POHYB ---
+        if (isAttacking)
         {
-            Velocity = input * Speed;
-            MoveAndSlide();
+            Velocity = Vector2.Zero;
+        }
+        else
+        {
+            Velocity = input.Normalized() * Speed;
 
             if (input != Vector2.Zero)
-                facingDirection = input; // směr, kam se hráč dívá
+                facingDirection = input;
         }
 
+        MoveAndSlide();
+
+        // --- ANIMACE ---
+        if (input == Vector2.Zero)
+        {
+            // idle animace podle posledniho smeru
+            if (Math.Abs(facingDirection.X) > Math.Abs(facingDirection.Y))
+            {
+                sprite.Play("idle_right");
+                sprite.FlipH = facingDirection.X < 0;
+            }
+            else if (facingDirection.Y < 0)
+            {
+                sprite.Play("idle_up");
+                sprite.FlipH = false;
+            }
+            else
+            {
+                sprite.Play("idle_down");
+                sprite.FlipH = false;
+            }
+        }
+        else
+        {
+            // walk animace
+            if (Math.Abs(input.X) > Math.Abs(input.Y))
+            {
+                sprite.Play("walk_right");
+                sprite.FlipH = input.X < 0;
+            }
+            else if (input.Y < 0)
+            {
+                sprite.Play("walk_up");
+                sprite.FlipH = false;
+            }
+            else
+            {
+                sprite.Play("walk_down");
+                sprite.FlipH = false;
+            }
+        }
+
+        // --- UTOK ---
         if (Input.IsActionJustPressed("attack") && !isAttacking)
             Attack();
     }
+
 
     private void _on_attack_area_body_entered(Node2D body)
     {

@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://b6lkbr80cgvhc"]
+
+[ext_resource type="Script" uid="uid://yojeo6i23bi" path="res://scripts/MazeGenerator.cs" id="1_5njy5"]
+[ext_resource type="PackedScene" uid="uid://c2ecuu4iqxqsj" path="res://scenes/Door.tscn" id="2_1v1rp"]
+[ext_resource type="Texture2D" uid="uid://u6gf76l77s58" path="res://assets/tiles/tiles.png" id="2_ejrmu"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m25rw"]
+resource_name = "test"
+texture = ExtResource("2_ejrmu")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="TileSet" id="TileSet_ykok4"]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 8
+physics_layer_0/collision_mask = 0
+sources/2 = SubResource("TileSetAtlasSource_m25rw")
+
+[node name="Dungeon" type="Node2D"]
+script = ExtResource("1_5njy5")
+DoorScene = ExtResource("2_1v1rp")
+
+[node name="PlayerSpawn" type="Marker2D" parent="."]
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Doors" type="Node2D" parent="."]
+
+[node name="WallLayer" type="TileMapLayer" parent="."]
+tile_set = SubResource("TileSet_ykok4")
+rendering_quadrant_size = 32
+physics_quadrant_size = 32
+
+[node name="FloorLayer" type="TileMapLayer" parent="."]
+tile_set = SubResource("TileSet_ykok4")
+rendering_quadrant_size = 32
+collision_enabled = false

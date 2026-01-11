@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://bdkxsrwiqt0js"]
+[gd_scene load_steps=9 format=3 uid="uid://bdkxsrwiqt0js"]
 
 [ext_resource type="PackedScene" uid="uid://crnmvaosaonq6" path="res://scenes/HUD.tscn" id="1_0bbpv"]
+[ext_resource type="PackedScene" uid="uid://b6lkbr80cgvhc" path="res://scenes/Dungeon.tscn" id="1_jlsqs"]
 [ext_resource type="PackedScene" uid="uid://c8irxjv7nr6e2" path="res://scenes/Player.tscn" id="2_rarhs"]
 [ext_resource type="PackedScene" uid="uid://bd61n8ptqpbti" path="res://scenes/Zombie.tscn" id="3_vcsgt"]
 [ext_resource type="PackedScene" uid="uid://bhhdotdnkds7e" path="res://scenes/inventory.tscn" id="4_rarhs"]
@@ -9,6 +10,8 @@
 [ext_resource type="Resource" uid="uid://b6eeoxfher0kr" path="res://items/Armor/IronChestplate.tres" id="7_nxtc6"]
 
 [node name="Main" type="Node2D"]
+
+[node name="Dungeon" parent="." groups=["dungeon"] instance=ExtResource("1_jlsqs")]
 
 [node name="UI" type="CanvasLayer" parent="."]
 

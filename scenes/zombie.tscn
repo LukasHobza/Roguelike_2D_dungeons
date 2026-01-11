@@ -65,14 +65,14 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3fthk"]
-size = Vector2(15, 24)
+size = Vector2(10, 21)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_httt1"]
 size = Vector2(24, 32)
 
 [node name="Zombie" type="CharacterBody2D"]
 collision_layer = 2
-collision_mask = 4
+collision_mask = 12
 script = ExtResource("1_httt1")
 PossibleDrops = Array[Object]([ExtResource("2_yaogc")])
 Speed = 30
@@ -83,7 +83,7 @@ animation = &"walk_down"
 frame_progress = 0.6255879
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 0)
+position = Vector2(1, 0.5)
 shape = SubResource("RectangleShape2D_3fthk")
 
 [node name="AttackArea" type="Area2D" parent="."]
