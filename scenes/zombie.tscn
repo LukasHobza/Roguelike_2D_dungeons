@@ -1,8 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://bd61n8ptqpbti"]
+[gd_scene load_steps=16 format=3 uid="uid://bd61n8ptqpbti"]
 
 [ext_resource type="Texture2D" uid="uid://cbskdcxufo13s" path="res://assets/enemy/zombie.png" id="1_1vlb3"]
 [ext_resource type="Script" uid="uid://bdk1clnengrq0" path="res://scripts/Zombie.cs" id="1_httt1"]
-[ext_resource type="Resource" uid="uid://03j7ewnjksu8" path="res://items/Weapons/Iron_sword.tres" id="2_yaogc"]
+[ext_resource type="Resource" uid="uid://cwx4liu6xoj1b" path="res://items/Potions/HealPotion.tres" id="2_yaogc"]
+[ext_resource type="Resource" uid="uid://03j7ewnjksu8" path="res://items/Weapons/Iron_sword.tres" id="3_m83i4"]
+[ext_resource type="Resource" uid="uid://df2gmmmdw8khh" path="res://items/Weapons/Iron_axe.tres" id="4_v58xl"]
+[ext_resource type="Resource" uid="uid://b6eeoxfher0kr" path="res://items/Armor/IronChestplate.tres" id="5_dta2r"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_httt1"]
 atlas = ExtResource("1_1vlb3")
@@ -74,8 +77,9 @@ size = Vector2(24, 32)
 collision_layer = 2
 collision_mask = 12
 script = ExtResource("1_httt1")
-PossibleDrops = Array[Object]([ExtResource("2_yaogc")])
-Speed = 30
+PossibleDrops = Array[Object]([ExtResource("2_yaogc"), ExtResource("3_m83i4"), ExtResource("4_v58xl"), ExtResource("5_dta2r")])
+DropChance = 1.0
+Speed = 40
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ftooa")

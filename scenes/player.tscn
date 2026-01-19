@@ -246,11 +246,12 @@ animations = [{
 size = Vector2(13, 21)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mdl7e"]
-size = Vector2(35, 12)
+size = Vector2(31, 12)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qu4a1"]
 
 [node name="Player" type="CharacterBody2D"]
+z_index = 1
 collision_mask = 28
 motion_mode = 1
 script = ExtResource("1_g2els")
@@ -279,7 +280,7 @@ offset = Vector2(26, 0)
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
-position = Vector2(23.5, 4)
+position = Vector2(21.5, 4)
 shape = SubResource("RectangleShape2D_mdl7e")
 debug_color = Color(0, 0.53051245, 0.9853844, 0.41960785)
 

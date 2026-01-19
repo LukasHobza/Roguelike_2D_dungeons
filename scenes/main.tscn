@@ -1,17 +1,15 @@
-[gd_scene load_steps=9 format=3 uid="uid://bdkxsrwiqt0js"]
+[gd_scene load_steps=6 format=3 uid="uid://bdkxsrwiqt0js"]
 
 [ext_resource type="PackedScene" uid="uid://crnmvaosaonq6" path="res://scenes/HUD.tscn" id="1_0bbpv"]
 [ext_resource type="PackedScene" uid="uid://b6lkbr80cgvhc" path="res://scenes/Dungeon.tscn" id="1_jlsqs"]
 [ext_resource type="PackedScene" uid="uid://c8irxjv7nr6e2" path="res://scenes/Player.tscn" id="2_rarhs"]
 [ext_resource type="PackedScene" uid="uid://bd61n8ptqpbti" path="res://scenes/Zombie.tscn" id="3_vcsgt"]
 [ext_resource type="PackedScene" uid="uid://bhhdotdnkds7e" path="res://scenes/inventory.tscn" id="4_rarhs"]
-[ext_resource type="PackedScene" uid="uid://b6rs6sp4i2m4v" path="res://scenes/item_pickup.tscn" id="5_c01mt"]
-[ext_resource type="Resource" uid="uid://cwx4liu6xoj1b" path="res://items/Potions/HealPotion.tres" id="5_nxtc6"]
-[ext_resource type="Resource" uid="uid://b6eeoxfher0kr" path="res://items/Armor/IronChestplate.tres" id="7_nxtc6"]
 
 [node name="Main" type="Node2D"]
 
 [node name="Dungeon" parent="." groups=["dungeon"] instance=ExtResource("1_jlsqs")]
+ZombieScene = ExtResource("3_vcsgt")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -21,12 +19,3 @@
 
 [node name="Player" parent="." groups=["player"] instance=ExtResource("2_rarhs")]
 position = Vector2(248, 283)
-
-[node name="ItemPickup" parent="." instance=ExtResource("5_c01mt")]
-position = Vector2(204, 360)
-ItemData = ExtResource("5_nxtc6")
-
-[node name="Zombie" parent="." instance=ExtResource("3_vcsgt")]
-position = Vector2(87, 284)
-PossibleDrops = Array[Object]([ExtResource("7_nxtc6")])
-DropChance = 1.0

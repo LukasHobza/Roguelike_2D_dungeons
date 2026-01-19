@@ -91,42 +91,43 @@ public partial class Player : CharacterBody2D
         MoveAndSlide();
 
         // --- ANIMACE ---
-        if (input == Vector2.Zero)
+        if (!isAttacking)
         {
-            // idle animace podle posledniho smeru
-            if (Math.Abs(facingDirection.X) > Math.Abs(facingDirection.Y))
+            if (input == Vector2.Zero)
             {
-                sprite.Play("idle_right");
-                sprite.FlipH = facingDirection.X < 0;
-            }
-            else if (facingDirection.Y < 0)
-            {
-                sprite.Play("idle_up");
-                sprite.FlipH = false;
+                if (Math.Abs(facingDirection.X) > Math.Abs(facingDirection.Y))
+                {
+                    sprite.Play("idle_right");
+                    sprite.FlipH = facingDirection.X < 0;
+                }
+                else if (facingDirection.Y < 0)
+                {
+                    sprite.Play("idle_up");
+                    sprite.FlipH = false;
+                }
+                else
+                {
+                    sprite.Play("idle_down");
+                    sprite.FlipH = false;
+                }
             }
             else
             {
-                sprite.Play("idle_down");
-                sprite.FlipH = false;
-            }
-        }
-        else
-        {
-            // walk animace
-            if (Math.Abs(input.X) > Math.Abs(input.Y))
-            {
-                sprite.Play("walk_right");
-                sprite.FlipH = input.X < 0;
-            }
-            else if (input.Y < 0)
-            {
-                sprite.Play("walk_up");
-                sprite.FlipH = false;
-            }
-            else
-            {
-                sprite.Play("walk_down");
-                sprite.FlipH = false;
+                if (Math.Abs(input.X) > Math.Abs(input.Y))
+                {
+                    sprite.Play("walk_right");
+                    sprite.FlipH = input.X < 0;
+                }
+                else if (input.Y < 0)
+                {
+                    sprite.Play("walk_up");
+                    sprite.FlipH = false;
+                }
+                else
+                {
+                    sprite.Play("walk_down");
+                    sprite.FlipH = false;
+                }
             }
         }
 
@@ -175,19 +176,19 @@ public partial class Player : CharacterBody2D
         }
         else if (facingDirection.Y > 0)
         {
-            weapon.ZIndex = 0;
+            weapon.ZIndex = 1;
             weapon.Offset = new Vector2(20, 2);
             sprite.Play("attack_down");
         }
         else if (facingDirection.X < 0)
         {
-            weapon.ZIndex = 0;
+            weapon.ZIndex = 1;
             weapon.Offset = new Vector2(26, 0);
             sprite.Play("attack_right");
         }
         else
         {
-            weapon.ZIndex = 0;
+            weapon.ZIndex = 1;
             weapon.Offset = new Vector2(26, 0);
             sprite.Play("attack_right");
         }

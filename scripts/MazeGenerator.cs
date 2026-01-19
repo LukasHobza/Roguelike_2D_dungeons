@@ -8,6 +8,8 @@ public partial class MazeGenerator : Node2D
     [Export] public int Height = 21;
     [Export] public int TileSize = 32;
     [Export] public PackedScene DoorScene;
+    [Export] public PackedScene ZombieScene;
+    [Export] public int BaseEnemyCount = 3;
 
     private TileMapLayer floorLayer;
     private TileMapLayer wallLayer;
@@ -15,6 +17,8 @@ public partial class MazeGenerator : Node2D
 
     private int[,] maze;
     private Random rng = new();
+
+    private int dungeonLevel = 1;
 
     private readonly Vector2I[] directions =
     {
@@ -42,8 +46,10 @@ public partial class MazeGenerator : Node2D
 
     private void GenerateNextLevel()
     {
+        dungeonLevel++;
         GenerateNewDungeon();
     }
+
 
     private void GenerateNewDungeon()
     {
@@ -53,10 +59,59 @@ public partial class MazeGenerator : Node2D
         foreach (Node c in doorsParent.GetChildren())
             c.QueueFree();
 
+        foreach (Node e in GetTree().GetNodesInGroup("enemy"))
+            e.QueueFree();
+
         GenerateMaze();
         DrawMaze();
         PlacePlayer();
+        PlaceEnemies();
         PlaceDoor();
+    }
+
+    private void PlaceEnemies()
+    {
+        int enemyCount = BaseEnemyCount + dungeonLevel;
+
+        for (int i = 0; i < enemyCount; i++)
+        {
+            Vector2I cell = GetRandomFloorCellFarFromPlayer(5);
+            var enemy = ZombieScene.Instantiate<Enemy>();
+
+            ScaleEnemyStats(enemy);
+
+            enemy.GlobalPosition = TileToWorld(cell);
+            AddChild(enemy);
+        }
+    }
+
+    private Vector2I GetRandomFloorCellFarFromPlayer(int minDistance)
+    {
+        Vector2I playerCell = new(1, 1);
+
+        while (true)
+        {
+            int x = rng.Next(1, Width - 1);
+            int y = rng.Next(1, Height - 1);
+
+            if (maze[x, y] != 0)
+                continue;
+
+            int dist = Mathf.Abs(x - playerCell.X) + Mathf.Abs(y - playerCell.Y);
+            if (dist < minDistance)
+                continue;
+
+            return new Vector2I(x, y);
+        }
+    }
+
+    private void ScaleEnemyStats(Enemy enemy)
+    {
+        enemy.MaxHP += dungeonLevel * 5;
+        enemy.Damage += dungeonLevel * 2;
+        enemy.Speed += dungeonLevel * 2;
+
+        enemy.CurrentHP = enemy.MaxHP;
     }
 
     // ---------- BLUDISTE ----------
@@ -132,37 +187,13 @@ public partial class MazeGenerator : Node2D
     private void PlaceDoor()
     {
         GD.Print("Spawn door");
-        Vector2I cell = FindFarthestFloor();
 
         var door = DoorScene.Instantiate<Door>();
-        door.GlobalPosition = TileToWorld(cell);
+        door.GlobalPosition = TileToWorld(new Vector2I(Width-2, Height-2));
 
         door.DoorEntered += OnDoorEntered;
 
         doorsParent.AddChild(door);
-    }
-
-
-    private Vector2I FindFarthestFloor()
-    {
-        Vector2I start = new(1, 1);
-        Vector2I best = start;
-        int maxDist = 0;
-
-        for (int x = 1; x < Width - 1; x++)
-            for (int y = 1; y < Height - 1; y++)
-            {
-                if (maze[x, y] == 0)
-                {
-                    int dist = Mathf.Abs(x - start.X) + Mathf.Abs(y - start.Y);
-                    if (dist > maxDist)
-                    {
-                        maxDist = dist;
-                        best = new Vector2I(x, y);
-                    }
-                }
-            }
-        return best;
     }
 
     //----
