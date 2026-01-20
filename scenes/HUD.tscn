@@ -31,3 +31,15 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("1_qpvh6")
 theme_override_font_sizes/font_size = 35
 text = "Zlato: 0"
+
+[node name="LabelDamage" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_qpvh6")
+theme_override_font_sizes/font_size = 35
+text = "Poškození: 0"
+
+[node name="LabelDefence" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_qpvh6")
+theme_override_font_sizes/font_size = 35
+text = "Brnění: 0"

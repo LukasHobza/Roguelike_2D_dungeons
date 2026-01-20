@@ -47,6 +47,7 @@ public partial class Player : CharacterBody2D
 
         sprite.Play("idle_right");
 
+        Defence = BaseDefence;
         Damage = BaseDamage;
 
         //nastaveni zivotu
@@ -222,6 +223,8 @@ public partial class Player : CharacterBody2D
         var hud = GetTree().GetRoot().GetNode<HUD>("Main/UI/HUD");
         hud.SetHP(CurrentHP,MaxHP);
         hud.SetGold(Gold);
+        hud.SetDamage(Damage);
+        hud.SetDefence(Defence);
     }
 
     public void Heal(int amount)
@@ -235,6 +238,7 @@ public partial class Player : CharacterBody2D
         EquippedWeapon = weapon;
         Damage = BaseDamage + weapon.Damage;
         GD.Print("Equipped weapon, damage:", Damage);
+        UpdateHUD();
     }
 
     public void UnequipWeapon()
@@ -242,6 +246,7 @@ public partial class Player : CharacterBody2D
         EquippedWeapon = null;
         Damage = BaseDamage;
         GD.Print("Weapon unequipped, damage reset to ", Damage);
+        UpdateHUD();
     }
 
     public void EquipArmor(Armor armor)
@@ -249,6 +254,7 @@ public partial class Player : CharacterBody2D
         EquippedArmor = armor;
         Defence = BaseDefence + armor.Defense;
         GD.Print("Equipped armor, defence:", Defence);
+        UpdateHUD();
     }
 
     public void UnequipArmor()
@@ -256,5 +262,6 @@ public partial class Player : CharacterBody2D
         EquippedArmor = null;
         Defence = BaseDefence;
         GD.Print("Armor unequipped, Defence reset to ", Defence);
+        UpdateHUD();
     }
 }

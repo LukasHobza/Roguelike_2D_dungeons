@@ -6,6 +6,8 @@ public partial class HUD : CanvasLayer
     private Label LabelHP;
     private Label LabelStamina;
     private Label LabelGold;
+    private Label LabelDamage;
+    private Label LabelDefence;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -13,6 +15,8 @@ public partial class HUD : CanvasLayer
         LabelHP = GetNode<Label>("VBoxContainer/LabelHP");
         LabelStamina = GetNode<Label>("VBoxContainer/LabelStamina");
         LabelGold = GetNode<Label>("VBoxContainer/LabelGold");
+        LabelDamage = GetNode<Label>("VBoxContainer/LabelDamage");
+        LabelDefence = GetNode<Label>("VBoxContainer/LabelDefence");
     }
 
     public void SetHP(int currentHP, int maxHP)
@@ -28,5 +32,15 @@ public partial class HUD : CanvasLayer
     public void SetGold(int gold)
     {
         LabelGold.Text = "Zlato: " + gold.ToString();
+    }
+
+    public void SetDamage(int damage)
+    {
+        LabelDamage.Text = "Poškození: " + damage.ToString();
+    }
+
+    public void SetDefence(int defence)
+    {
+        LabelDefence.Text = "Brnění: " + defence.ToString();
     }
 }
