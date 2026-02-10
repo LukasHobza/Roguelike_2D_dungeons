@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://dlkv3r6piq43y"]
+
+[ext_resource type="Script" uid="uid://b68ygjcpd0psx" path="res://scripts/EndLevelSummary.cs" id="1_a43ji"]
+
+[node name="EndLevelSummary" type="CanvasLayer"]
+script = ExtResource("1_a43ji")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LabelTime" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+
+[node name="LabelKills" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+
+[node name="LabelGold" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+
+[node name="ButtonNext" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Další level"

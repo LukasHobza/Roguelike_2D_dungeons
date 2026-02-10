@@ -19,6 +19,8 @@ public partial class MazeGenerator : Node2D
     private Random rng = new();
 
     private int dungeonLevel = 1;
+    private int aliveEnemies = 0;
+    private bool doorSpawned = false;
 
     private readonly Vector2I[] directions =
     {
@@ -34,14 +36,42 @@ public partial class MazeGenerator : Node2D
         wallLayer = GetNode<TileMapLayer>("WallLayer");
         doorsParent = GetNode<Node2D>("Doors");
 
-        GenerateNewDungeon();
+        CallDeferred(nameof(GenerateNewDungeon));
     }
 
     private void OnDoorEntered()
     {
         GD.Print("NEXT LEVEL");
 
-        CallDeferred(nameof(GenerateNextLevel));
+        var player = GetTree().GetFirstNodeInGroup("player") as Player;
+        var stats = GetNode<RunStats>("/root/RunStats");
+
+        stats.EndLevel(player.Gold);
+
+        ShowSummary();
+
+
+
+        //CallDeferred(nameof(GenerateNextLevel));
+    }
+
+    private void ShowSummary()
+    {
+        var summaryScene = GD.Load<PackedScene>("res://scenes/EndLevelSummary.tscn");
+        var summaryNode = summaryScene.Instantiate();
+        var summary = summaryNode as EndLevelSummary;
+        if (summary == null)
+        {
+            GD.PrintErr("EndLevelSummary script není přiřazen root node!");
+        }
+
+        summary.NextLevelRequested += () =>
+        {
+            dungeonLevel++;
+            GenerateNewDungeon();
+        };
+
+        GetTree().Root.AddChild(summary);
     }
 
     private void GenerateNextLevel()
@@ -53,6 +83,10 @@ public partial class MazeGenerator : Node2D
 
     private void GenerateNewDungeon()
     {
+        var player = GetTree().GetFirstNodeInGroup("player") as Player;
+        GetNode<RunStats>("/root/RunStats").StartLevel(player.Gold);
+
+        doorSpawned = false;
         floorLayer.Clear();
         wallLayer.Clear();
 
@@ -62,26 +96,97 @@ public partial class MazeGenerator : Node2D
         foreach (Node e in GetTree().GetNodesInGroup("enemy"))
             e.QueueFree();
 
-        GenerateMaze();
-        DrawMaze();
         PlacePlayer();
-        PlaceEnemies();
-        PlaceDoor();
+
+        if (IsBossLevel())
+        {
+            GenerateBossRoom();
+        }
+        else
+        {
+            GenerateMaze();
+            DrawMaze();
+            PlaceEnemies();
+        }
+        
+        
+    }
+
+    private bool IsBossLevel()
+    {
+        return dungeonLevel % 3 == 0;
+    }
+
+    private void GenerateBossRoom()
+    {
+        maze = new int[Width, Height];
+        aliveEnemies = 1;
+        for (int x = 0; x < Width; x++)
+        {
+            for (int y = 0; y < Height; y++)
+            {
+                // okraje = zdi
+                if (x == 0 || y == 0 || x == Width - 1 || y == Height - 1)
+                    maze[x, y] = 1;
+                else
+                    maze[x, y] = 0;
+            }
+        }
+
+        DrawMaze();
+        PlaceBoss();
+    }
+
+    private void PlaceBoss()
+    {
+        Vector2I center = new(Width / 2, Height / 2);
+
+        var boss = ZombieScene.Instantiate<Enemy>();
+        boss.EnemyDied += OnEnemyDied;
+        // hodne silny
+        boss.MaxHP = 200 + dungeonLevel * 50;
+        boss.Damage = 30 + dungeonLevel * 5;
+        boss.Speed = 50;
+
+        boss.CurrentHP = boss.MaxHP;
+
+        boss.GlobalPosition = TileToWorld(center);
+        AddChild(boss);
+
+        GD.Print("BOSS SPANWED");
     }
 
     private void PlaceEnemies()
     {
         int enemyCount = BaseEnemyCount + dungeonLevel;
+        aliveEnemies = enemyCount;
+        GD.Print("enemy count: " + enemyCount);
 
         for (int i = 0; i < enemyCount; i++)
         {
-            Vector2I cell = GetRandomFloorCellFarFromPlayer(5);
             var enemy = ZombieScene.Instantiate<Enemy>();
 
-            ScaleEnemyStats(enemy);
+            enemy.EnemyDied += OnEnemyDied;
 
-            enemy.GlobalPosition = TileToWorld(cell);
+            ScaleEnemyStats(enemy);
+            enemy.GlobalPosition = TileToWorld(
+                GetRandomFloorCellFarFromPlayer(5)
+            );
+
             AddChild(enemy);
+        }
+    }
+
+    private void OnEnemyDied(Enemy enemy)
+    {
+        aliveEnemies--;
+
+        GD.Print($"Enemy umrel, zbyva: {aliveEnemies}");
+
+        if (aliveEnemies <= 0 && !doorSpawned)
+        {
+            doorSpawned = true;
+            CallDeferred(nameof(PlaceDoor));
         }
     }
 
@@ -186,6 +291,8 @@ public partial class MazeGenerator : Node2D
 
     private void PlaceDoor()
     {
+
+
         GD.Print("Spawn door");
 
         var door = DoorScene.Instantiate<Door>();

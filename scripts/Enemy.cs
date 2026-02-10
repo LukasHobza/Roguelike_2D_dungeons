@@ -12,8 +12,13 @@ public partial class Enemy : CharacterBody2D
     [Export] public int Damage = 10;
     public int CurrentHP;
 
+    [Signal]
+    public delegate void EnemyDiedEventHandler(Enemy enemy);
+
     public override void _Ready()
     {
+        AddToGroup("enemy");
+
         player = GetTree().GetRoot().GetNode<Node2D>("Main/Player");
         sprite = GetNodeOrNull<AnimatedSprite2D>("AnimatedSprite2D");
         CurrentHP = MaxHP;
@@ -84,11 +89,16 @@ public partial class Enemy : CharacterBody2D
 
     protected virtual void Die()
     {
+        RunStats stats = GetNode<RunStats>("/root/RunStats");
+        stats.RegisterKill();
+
         var player = GetTree().GetFirstNodeInGroup("player") as Player;
         if (player != null)
         {
             player.AddGold(1);
         }
+
+        EmitSignal(SignalName.EnemyDied, this);
 
 
         GD.Print($"{GetType().Name} died!");
