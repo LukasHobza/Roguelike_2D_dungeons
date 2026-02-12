@@ -24,6 +24,7 @@ public partial class Player : CharacterBody2D
     public int Damage;
     public Weapon EquippedWeapon;
 
+    private bool setBonusActive = false;
     private Sprite2D weapon;
     private Area2D attackArea;
     private bool isAttacking = false;
@@ -225,6 +226,7 @@ public partial class Player : CharacterBody2D
         hud.SetGold(Gold);
         hud.SetDamage(Damage);
         hud.SetDefence(Defence);
+        hud.SetSet(setBonusActive);
     }
 
     public void Heal(int amount)
@@ -236,32 +238,56 @@ public partial class Player : CharacterBody2D
     public void EquipWeapon(Weapon weapon)
     {
         EquippedWeapon = weapon;
-        Damage = BaseDamage + weapon.Damage;
-        GD.Print("Equipped weapon, damage:", Damage);
-        UpdateHUD();
+        RecalculateStats();
     }
 
     public void UnequipWeapon()
     {
         EquippedWeapon = null;
-        Damage = BaseDamage;
-        GD.Print("Weapon unequipped, damage reset to ", Damage);
-        UpdateHUD();
+        RecalculateStats();
     }
 
     public void EquipArmor(Armor armor)
     {
         EquippedArmor = armor;
-        Defence = BaseDefence + armor.Defense;
-        GD.Print("Equipped armor, defence:", Defence);
-        UpdateHUD();
+        RecalculateStats();
     }
 
     public void UnequipArmor()
     {
         EquippedArmor = null;
+        RecalculateStats();
+    }
+
+    private void RecalculateStats()
+    {
+        // zasklad
+        Damage = BaseDamage;
         Defence = BaseDefence;
-        GD.Print("Armor unequipped, Defence reset to ", Defence);
+
+        if (EquippedWeapon != null)
+            Damage += EquippedWeapon.Damage;
+
+        if (EquippedArmor != null)
+            Defence += EquippedArmor.Defense;
+
+        setBonusActive = false;
+
+        //SET BONUS
+        if (EquippedWeapon != null && EquippedArmor != null)
+        {
+            if (!string.IsNullOrEmpty(EquippedWeapon.SetId) &&
+                EquippedWeapon.SetId == EquippedArmor.SetId)
+            {
+                Damage *= 2;
+                Defence *= 2;
+                setBonusActive = true;
+
+                GD.Print("SET BONUS ACTIVE");
+            }
+        }
+
         UpdateHUD();
     }
+
 }

@@ -8,6 +8,8 @@ public partial class ItemPickup : Area2D
 
     public override void _Ready()
     {
+        AddToGroup("ground_item");
+
         sprite = GetNode<Sprite2D>("Sprite2D");
 
         if (ItemData != null && ItemData.Icon != null)

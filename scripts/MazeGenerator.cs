@@ -96,6 +96,9 @@ public partial class MazeGenerator : Node2D
         foreach (Node e in GetTree().GetNodesInGroup("enemy"))
             e.QueueFree();
 
+        foreach (Node item in GetTree().GetNodesInGroup("ground_item"))
+            item.QueueFree();
+
         PlacePlayer();
 
         if (IsBossLevel())

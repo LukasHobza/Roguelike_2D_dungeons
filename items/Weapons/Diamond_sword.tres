@@ -8,4 +8,5 @@ script = ExtResource("1_6inl6")
 Damage = 10
 ItemName = "Diamond sword"
 Icon = ExtResource("1_bewrk")
+SetId = "diamond"
 metadata/_custom_type_script = "uid://b8fb6agr5q4uf"

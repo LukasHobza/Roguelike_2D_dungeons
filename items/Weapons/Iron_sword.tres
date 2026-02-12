@@ -7,4 +7,5 @@
 script = ExtResource("1_p6w15")
 ItemName = "Iron sword"
 Icon = ExtResource("1_an35o")
+SetId = "iron"
 metadata/_custom_type_script = "uid://b8fb6agr5q4uf"

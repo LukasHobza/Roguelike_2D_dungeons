@@ -8,4 +8,5 @@ script = ExtResource("1_4pxua")
 Defense = 5
 ItemName = "Iron chestplate"
 Icon = ExtResource("1_1rhg6")
+SetId = "iron"
 metadata/_custom_type_script = "uid://b6rol5my80uy4"

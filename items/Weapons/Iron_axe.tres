@@ -8,4 +8,5 @@ script = ExtResource("1_q2711")
 Damage = 9
 ItemName = "Iron axe"
 Icon = ExtResource("1_a7adg")
+SetId = "iron"
 metadata/_custom_type_script = "uid://b8fb6agr5q4uf"
