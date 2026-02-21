@@ -37,6 +37,16 @@ public partial class Player : CharacterBody2D
         Gold = db.LoadGold();
         GD.Print("Loaded gold: ", Gold);
 
+        //upgrady z shopu
+        int hpLvl = db.GetHpLevel();
+        int dmgLvl = db.GetDamageLevel();
+        int defLvl = db.GetDefenceLevel();
+
+        MaxHP += hpLvl * 10;
+        BaseDamage += dmgLvl * 2;
+        BaseDefence += defLvl * 1;
+        //
+
         Inventory = GetTree().GetFirstNodeInGroup("inventory") as Inventory;
 
         sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");

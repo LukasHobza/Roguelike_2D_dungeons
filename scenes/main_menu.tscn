@@ -48,6 +48,10 @@ text = "Hrát"
 layout_mode = 2
 text = "Nastavení"
 
+[node name="ButtonShop" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Obchad"
+
 [node name="ButtonQuit" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 text = "Zavřít"

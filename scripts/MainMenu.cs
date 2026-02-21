@@ -10,11 +10,13 @@ public partial class MainMenu : Control
         var ButtonStart = GetNode<Button>("CenterContainer/VBoxContainer/ButtonPlay");
         var ButtonQuit = GetNode<Button>("CenterContainer/VBoxContainer/ButtonQuit");
         var ButtonSettings = GetNode<Button>("CenterContainer/VBoxContainer/ButtonSettings");
+        var ButtonShop = GetNode<Button>("CenterContainer/VBoxContainer/ButtonShop");
 
         //bude volat tuto fci po kliknuti
         ButtonStart.Pressed += OnStartPressed;
         ButtonQuit.Pressed += OnQuitPressed;
         ButtonSettings.Pressed += OnSettingsPressed;
+        ButtonShop.Pressed += OnShopPressed;
     }
 
     private void OnStartPressed()
@@ -37,8 +39,8 @@ public partial class MainMenu : Control
         GetTree().Quit();
     }
 
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
-    public override void _Process(double delta)
-	{
-	}
+    private void OnShopPressed()
+    {
+        GetTree().ChangeSceneToFile("res://scenes/Shop.tscn");
+    }
 }
