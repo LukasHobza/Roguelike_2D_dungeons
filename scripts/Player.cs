@@ -271,7 +271,7 @@ public partial class Player : CharacterBody2D
 
     private void RecalculateStats()
     {
-        // zasklad
+        // zaklad
         Damage = BaseDamage;
         Defence = BaseDefence;
 
