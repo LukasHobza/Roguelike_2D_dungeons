@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bdkxsrwiqt0js"]
+[gd_scene load_steps=7 format=3 uid="uid://bdkxsrwiqt0js"]
 
 [ext_resource type="PackedScene" uid="uid://crnmvaosaonq6" path="res://scenes/HUD.tscn" id="1_0bbpv"]
 [ext_resource type="PackedScene" uid="uid://b6lkbr80cgvhc" path="res://scenes/Dungeon.tscn" id="1_jlsqs"]
 [ext_resource type="PackedScene" uid="uid://c8irxjv7nr6e2" path="res://scenes/Player.tscn" id="2_rarhs"]
+[ext_resource type="PackedScene" uid="uid://ycvgf0ydoryk" path="res://scenes/Boss.tscn" id="3_c01mt"]
 [ext_resource type="PackedScene" uid="uid://bd61n8ptqpbti" path="res://scenes/Zombie.tscn" id="3_vcsgt"]
 [ext_resource type="PackedScene" uid="uid://bhhdotdnkds7e" path="res://scenes/inventory.tscn" id="4_rarhs"]
 
@@ -12,6 +13,7 @@
 Width = 13
 Height = 13
 ZombieScene = ExtResource("3_vcsgt")
+BossScene = ExtResource("3_c01mt")
 
 [node name="UI" type="CanvasLayer" parent="."]
 

@@ -9,6 +9,7 @@ public partial class MazeGenerator : Node2D
     [Export] public int TileSize = 32;
     [Export] public PackedScene DoorScene;
     [Export] public PackedScene ZombieScene;
+    [Export] public PackedScene BossScene;
     [Export] public int BaseEnemyCount = 3;
 
     private TileMapLayer floorLayer;
@@ -144,7 +145,7 @@ public partial class MazeGenerator : Node2D
     {
         Vector2I center = new(Width / 2, Height / 2);
 
-        var boss = ZombieScene.Instantiate<Enemy>();
+        var boss = BossScene.Instantiate<Enemy>();
         boss.EnemyDied += OnEnemyDied;
         // hodne silny
         boss.MaxHP = 200 + dungeonLevel * 50;

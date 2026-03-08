@@ -1,0 +1,98 @@
+[gd_scene load_steps=16 format=3 uid="uid://ycvgf0ydoryk"]
+
+[ext_resource type="Script" uid="uid://bdk1clnengrq0" path="res://scripts/Zombie.cs" id="1_cs582"]
+[ext_resource type="Resource" uid="uid://cwx4liu6xoj1b" path="res://items/Potions/HealPotion.tres" id="2_pfyq2"]
+[ext_resource type="Resource" uid="uid://03j7ewnjksu8" path="res://items/Weapons/Iron_sword.tres" id="3_85kei"]
+[ext_resource type="Resource" uid="uid://df2gmmmdw8khh" path="res://items/Weapons/Iron_axe.tres" id="4_kitqk"]
+[ext_resource type="Resource" uid="uid://b6eeoxfher0kr" path="res://items/Armor/IronChestplate.tres" id="5_gfnkn"]
+[ext_resource type="Texture2D" uid="uid://cuu4e1a1ko6tq" path="res://assets/enemy/boss.png" id="6_cs582"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pfyq2"]
+atlas = ExtResource("6_cs582")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_85kei"]
+atlas = ExtResource("6_cs582")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kitqk"]
+atlas = ExtResource("6_cs582")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gfnkn"]
+atlas = ExtResource("6_cs582")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2r62o"]
+atlas = ExtResource("6_cs582")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ncbpu"]
+atlas = ExtResource("6_cs582")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ftooa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pfyq2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_85kei")
+}],
+"loop": true,
+"name": &"walk_down",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kitqk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gfnkn")
+}],
+"loop": true,
+"name": &"walk_right",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2r62o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ncbpu")
+}],
+"loop": true,
+"name": &"walk_up",
+"speed": 3.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3fthk"]
+size = Vector2(10, 21)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_httt1"]
+size = Vector2(24, 32)
+
+[node name="Zombie" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 12
+script = ExtResource("1_cs582")
+PossibleDrops = Array[Object]([ExtResource("2_pfyq2"), ExtResource("3_85kei"), ExtResource("4_kitqk"), ExtResource("5_gfnkn")])
+DropChance = 1.0
+Speed = 50
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ftooa")
+animation = &"walk_right"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 0.5)
+shape = SubResource("RectangleShape2D_3fthk")
+
+[node name="AttackArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_httt1")
+
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
