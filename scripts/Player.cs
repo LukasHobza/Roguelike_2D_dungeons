@@ -245,6 +245,7 @@ public partial class Player : CharacterBody2D
 
         if (CurrentHP == 0)
         {
+            GetTree().ChangeSceneToFile("res://scenes/main_menu.tscn");
             GD.Print("Player died!");
         }
     }
