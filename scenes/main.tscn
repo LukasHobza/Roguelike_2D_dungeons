@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bdkxsrwiqt0js"]
+[gd_scene load_steps=8 format=3 uid="uid://bdkxsrwiqt0js"]
 
 [ext_resource type="PackedScene" uid="uid://crnmvaosaonq6" path="res://scenes/HUD.tscn" id="1_0bbpv"]
 [ext_resource type="PackedScene" uid="uid://b6lkbr80cgvhc" path="res://scenes/Dungeon.tscn" id="1_jlsqs"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://ycvgf0ydoryk" path="res://scenes/Boss.tscn" id="3_c01mt"]
 [ext_resource type="PackedScene" uid="uid://bd61n8ptqpbti" path="res://scenes/Zombie.tscn" id="3_vcsgt"]
 [ext_resource type="PackedScene" uid="uid://bhhdotdnkds7e" path="res://scenes/inventory.tscn" id="4_rarhs"]
+[ext_resource type="AudioStream" uid="uid://bgabkn24xnf3x" path="res://assets/music/SleepTalking.wav" id="7_nxtc6"]
 
 [node name="Main" type="Node2D"]
 
@@ -23,3 +24,8 @@ BossScene = ExtResource("3_c01mt")
 
 [node name="Player" parent="." groups=["player"] instance=ExtResource("2_rarhs")]
 position = Vector2(248, 283)
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_nxtc6")
+volume_db = -22.1
+autoplay = true

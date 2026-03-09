@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b3dsgnseyvts8"
+path="res://.godot/imported/Playersounds - Track 5 - Hurt1.wav-9653dd1975baeadb826a1ae9ea3984b1.sample"
+
+[deps]
+
+source_file="res://assets/sound/Playersounds - Track 5 - Hurt1.wav"
+dest_files=["res://.godot/imported/Playersounds - Track 5 - Hurt1.wav-9653dd1975baeadb826a1ae9ea3984b1.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

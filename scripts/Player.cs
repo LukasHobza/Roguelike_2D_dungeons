@@ -19,6 +19,8 @@ public partial class Player : CharacterBody2D
     public int BaseDefence = 0;
     public Armor EquippedArmor;
 
+    private bool isInvulnerable = true;
+
     //damage
     [Export] public int BaseDamage = 15;
     public int Damage;
@@ -29,6 +31,10 @@ public partial class Player : CharacterBody2D
     private Area2D attackArea;
     private bool isAttacking = false;
     private Vector2 facingDirection = Vector2.Right;
+
+    //zvuk
+    private AudioStreamPlayer attackSound;
+    private AudioStreamPlayer hurtSound;
 
     //
     public override void _Ready()
@@ -61,9 +67,15 @@ public partial class Player : CharacterBody2D
         Defence = BaseDefence;
         Damage = BaseDamage;
 
+        //zvuk
+        attackSound = GetNode<AudioStreamPlayer>("AttackSound");
+        hurtSound = GetNode<AudioStreamPlayer>("HurtSound");
+
         //nastaveni zivotu
         CurrentHP = MaxHP;
         UpdateHUD();
+
+        GetTree().CreateTimer(1.0f).Timeout += () => isInvulnerable = false;
     }
 
     public void AddGold(int amount)
@@ -164,6 +176,9 @@ public partial class Player : CharacterBody2D
         weapon.Visible = true;
         attackArea.Monitoring = true;
 
+        //prehrani zvuku
+        attackSound.Play();
+
         previousAnimation = sprite.Animation;//ulozi animaci pred utokem
 
         // natočení meče podle směru
@@ -218,8 +233,13 @@ public partial class Player : CharacterBody2D
 
     public void TakeDamage(int amount)
     {
+        if (isInvulnerable) return;
+
         int damage = Mathf.Max(amount - Defence, 0);
         CurrentHP -= damage;
+
+        hurtSound.Play();
+
         if (CurrentHP < 0) CurrentHP = 0;
         UpdateHUD();
 

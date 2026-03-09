@@ -49,3 +49,17 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("1_qpvh6")
 theme_override_font_sizes/font_size = 35
 text = "Set bonus: 0*"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="Button" type="Button" parent="VBoxContainer2"]
+layout_mode = 2
+text = "Zpět do hlavního menu"
+
+[connection signal="pressed" from="VBoxContainer2/Button" to="." method="_on_button_pressed"]

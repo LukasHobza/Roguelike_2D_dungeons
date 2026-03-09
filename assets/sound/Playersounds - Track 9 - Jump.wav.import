@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://7uwfy8dbiplu"
+path="res://.godot/imported/Playersounds - Track 9 - Jump.wav-e4a0a1dde67fa4b8f4d3f098a711ca4c.sample"
+
+[deps]
+
+source_file="res://assets/sound/Playersounds - Track 9 - Jump.wav"
+dest_files=["res://.godot/imported/Playersounds - Track 9 - Jump.wav-e4a0a1dde67fa4b8f4d3f098a711ca4c.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

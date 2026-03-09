@@ -12,6 +12,12 @@ public partial class Enemy : CharacterBody2D
     [Export] public int Damage = 10;
     public int CurrentHP;
 
+    //veci pro opakovany utok
+    [Export] public float AttackCooldown = 1.0f; // jak casto utoci v s
+    private float attackTimer = 0.0f;
+    private bool isPlayerInRange = false;
+    private Player playerToDamage;
+
     [Signal]
     public delegate void EnemyDiedEventHandler(Enemy enemy);
 
@@ -43,6 +49,18 @@ public partial class Enemy : CharacterBody2D
         MoveAndSlide();
 
         UpdateAnimation(direction);
+
+        //veci pro opakovany utok
+        if (isPlayerInRange && playerToDamage != null)
+        {
+            attackTimer += (float)delta;
+            if (attackTimer >= AttackCooldown)
+            {
+                playerToDamage.TakeDamage(Damage);
+                GD.Print($"{GetType().Name} bit the player again for {Damage}!");
+                attackTimer = 0.0f; // reset casovace
+            }
+        }
     }
 
     // univerzalni animace chůze
@@ -67,6 +85,32 @@ public partial class Enemy : CharacterBody2D
         }
     }
 
+    protected virtual void _on_attack_area_body_entered(Node2D body)
+    {
+        if (body is Player p)
+        {
+            isPlayerInRange = true;
+            playerToDamage = p;
+
+            // prvni utok hned pri doteku
+            p.TakeDamage(Damage);
+            attackTimer = 0.0f;
+            GD.Print($"{GetType().Name} dealt initial {Damage} damage!");
+        }
+    }
+
+    protected virtual void _on_attack_area_body_exited(Node2D body)
+    {
+        if (body is Player)
+        {
+            isPlayerInRange = false;
+            playerToDamage = null;
+            attackTimer = 0.0f;
+        }
+    }
+
+
+    /*
     // zásah hráče
     protected virtual void _on_attack_area_body_entered(Node2D body)
     {
@@ -76,6 +120,7 @@ public partial class Enemy : CharacterBody2D
             GD.Print($"{GetType().Name} dealt {Damage} damage!");//GetType().Name nazev tridy aktualniho objektu
         }
     }
+    */
 
     // poškození od hráče
     public virtual void TakeDamage(int amount)

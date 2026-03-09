@@ -51,4 +51,9 @@ public partial class HUD : CanvasLayer
         if (isActive) LabelSet.Text = "Set bonus: 2*";
         else LabelSet.Text = "Set bonus: 1*";        
     }
+
+    private void _on_button_pressed()
+    {
+        GetTree().ChangeSceneToFile("res://scenes/main_menu.tscn");
+    }
 }

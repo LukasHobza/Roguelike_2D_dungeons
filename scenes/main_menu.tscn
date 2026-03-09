@@ -50,7 +50,7 @@ text = "Nastavení"
 
 [node name="ButtonShop" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
-text = "Obchad"
+text = "Obchod"
 
 [node name="ButtonQuit" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
