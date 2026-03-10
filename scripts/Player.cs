@@ -51,7 +51,6 @@ public partial class Player : CharacterBody2D
         MaxHP += hpLvl * 10;
         BaseDamage += dmgLvl * 2;
         BaseDefence += defLvl * 1;
-        //
 
         Inventory = GetTree().GetFirstNodeInGroup("inventory") as Inventory;
 
@@ -177,7 +176,7 @@ public partial class Player : CharacterBody2D
         attackArea.Monitoring = true;
 
         //prehrani zvuku
-        attackSound.Play();
+        if (weapon.Texture != null) attackSound.Play();
 
         previousAnimation = sprite.Animation;//ulozi animaci pred utokem
 
@@ -266,21 +265,31 @@ public partial class Player : CharacterBody2D
         UpdateHUD();
     }
 
-    public void EquipWeapon(Weapon weapon)
+    public void EquipWeapon(Weapon weaponData)
     {
-        EquippedWeapon = weapon;
+        EquippedWeapon = weaponData;
+
+        // nastaveni obrazku pro zbran hrace
+        if (weaponData != null && weaponData.Icon != null)
+        {
+            weapon.Texture = weaponData.Icon;
+        }
+
         RecalculateStats();
     }
 
     public void UnequipWeapon()
     {
         EquippedWeapon = null;
+
+        weapon.Texture = null;
+
         RecalculateStats();
     }
 
-    public void EquipArmor(Armor armor)
+    public void EquipArmor(Armor armorData)
     {
-        EquippedArmor = armor;
+        EquippedArmor = armorData;
         RecalculateStats();
     }
 

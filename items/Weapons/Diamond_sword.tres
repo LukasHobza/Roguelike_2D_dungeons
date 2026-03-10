@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_6inl6")
-Damage = 10
+Damage = 20
 ItemName = "Diamond sword"
 Icon = ExtResource("1_bewrk")
 SetId = "diamond"

@@ -10,15 +10,29 @@ public partial class Settings : Control
         resolutionOption = GetNode<OptionButton>("Panel/VBoxContainer/HBoxContainer/OptionButton");
         volumeSlider = GetNode<HSlider>("Panel/VBoxContainer/HBoxContainer2/HSlider");
 
+        // aktuální hlasitost v decibelech z hlavního busu 0
+        float currentDb = AudioServer.GetBusVolumeDb(0);
+        // převedeme zpet na lineární hodnotu 0.0 - 1.0 a pak na 0-100 pro slider
+        volumeSlider.Value = Mathf.DbToLinear(currentDb) * 100f;
+
         resolutionOption.Clear();
         resolutionOption.AddItem("800x600");
         resolutionOption.AddItem("1280x720");
         resolutionOption.AddItem("1600x900");
         resolutionOption.AddItem("1920x1080");
 
-        volumeSlider.MinValue = 0;
-        volumeSlider.MaxValue = 100;
-        volumeSlider.Value = 80;
+        // nastaveni správneho indexu v menu podle aktualni velikosti okna
+        Vector2I windowSize = DisplayServer.WindowGetSize();
+        string currentResString = $"{windowSize.X}x{windowSize.Y}";
+
+        for (int i = 0; i < resolutionOption.ItemCount; i++)
+        {
+            if (resolutionOption.GetItemText(i) == currentResString)
+            {
+                resolutionOption.Selected = i;
+                break;
+            }
+        }
 
         volumeSlider.ValueChanged += OnVolumeChanged;
         resolutionOption.ItemSelected += OnResolutionSelected;

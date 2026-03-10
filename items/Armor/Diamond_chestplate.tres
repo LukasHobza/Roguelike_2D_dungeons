@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_sq50w")
-Defense = 10
+Defense = 15
 ItemName = "Diamond chestplate"
 Icon = ExtResource("1_pquhe")
 SetId = "diamond"

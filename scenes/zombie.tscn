@@ -77,9 +77,7 @@ size = Vector2(24, 32)
 collision_layer = 2
 collision_mask = 12
 script = ExtResource("1_httt1")
-PossibleDrops = Array[Object]([ExtResource("2_yaogc"), ExtResource("3_m83i4"), ExtResource("4_v58xl"), ExtResource("5_dta2r")])
-DropChance = 1.0
-Speed = 50
+PossibleDrops = Array[Object]([ExtResource("2_yaogc"), ExtResource("2_yaogc"), ExtResource("2_yaogc"), ExtResource("2_yaogc"), ExtResource("2_yaogc"), ExtResource("2_yaogc"), ExtResource("5_dta2r"), ExtResource("4_v58xl"), ExtResource("3_m83i4"), ExtResource("2_yaogc"), ExtResource("2_yaogc")])
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ftooa")

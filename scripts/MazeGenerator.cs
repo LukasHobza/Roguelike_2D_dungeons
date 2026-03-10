@@ -50,10 +50,6 @@ public partial class MazeGenerator : Node2D
         stats.EndLevel(player.Gold);
 
         ShowSummary();
-
-
-
-        //CallDeferred(nameof(GenerateNextLevel));
     }
 
     private void ShowSummary()
@@ -69,18 +65,16 @@ public partial class MazeGenerator : Node2D
         summary.NextLevelRequested += () =>
         {
             dungeonLevel++;
+            if (IsBossLevel())
+            {
+                Width += 2;
+                Height += 2;
+            }
             GenerateNewDungeon();
         };
 
         GetTree().Root.AddChild(summary);
     }
-
-    private void GenerateNextLevel()
-    {
-        dungeonLevel++;
-        GenerateNewDungeon();
-    }
-
 
     private void GenerateNewDungeon()
     {
@@ -112,8 +106,6 @@ public partial class MazeGenerator : Node2D
             DrawMaze();
             PlaceEnemies();
         }
-        
-        
     }
 
     private bool IsBossLevel()
@@ -148,9 +140,8 @@ public partial class MazeGenerator : Node2D
         var boss = BossScene.Instantiate<Enemy>();
         boss.EnemyDied += OnEnemyDied;
         // hodne silny
-        boss.MaxHP = 200 + dungeonLevel * 50;
-        boss.Damage = 30 + dungeonLevel * 5;
-        boss.Speed = 50;
+        boss.MaxHP += dungeonLevel * 20;
+        boss.Damage += dungeonLevel * 8;
 
         boss.CurrentHP = boss.MaxHP;
 

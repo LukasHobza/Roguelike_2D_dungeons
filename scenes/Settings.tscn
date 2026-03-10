@@ -29,6 +29,7 @@ grow_vertical = 2
 
 [node name="Label" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "Nastavení"
 horizontal_alignment = 1
 
@@ -37,16 +38,19 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="Panel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "Rozlišení"
 
 [node name="OptionButton" type="OptionButton" parent="Panel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Panel/VBoxContainer"]
 layout_mode = 2
 
 [node name="Label" type="Label" parent="Panel/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "Hlasitost"
 
 [node name="HSlider" type="HSlider" parent="Panel/VBoxContainer/HBoxContainer2"]
@@ -55,6 +59,7 @@ size_flags_horizontal = 3
 
 [node name="Button" type="Button" parent="Panel/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "Zpět"
 
 [connection signal="pressed" from="Panel/VBoxContainer/Button" to="." method="OnBackPressed"]

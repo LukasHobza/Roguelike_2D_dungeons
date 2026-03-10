@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("1_yfies")
+HealAmount = 20
 ItemName = "Heal Potion"
 Icon = ExtResource("1_kylyw")
 metadata/_custom_type_script = "uid://bbjtwk6vsp1op"

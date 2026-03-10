@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("1_p6w15")
+Damage = 8
 ItemName = "Iron sword"
 Icon = ExtResource("1_an35o")
 SetId = "iron"

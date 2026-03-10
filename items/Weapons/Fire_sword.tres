@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_fkc1e")
-Damage = 15
+Damage = 50
 ItemName = "Fire sword"
 Icon = ExtResource("1_q1beo")
 metadata/_custom_type_script = "uid://b8fb6agr5q4uf"

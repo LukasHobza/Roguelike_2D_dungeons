@@ -36,6 +36,7 @@ folder_colors={
 "res://assets/weapons/": "blue",
 "res://database/": "purple",
 "res://fonts/": "gray",
+"res://items/": "orange",
 "res://scenes/": "pink",
 "res://scripts/": "blue"
 }
