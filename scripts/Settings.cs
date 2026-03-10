@@ -10,28 +10,42 @@ public partial class Settings : Control
         resolutionOption = GetNode<OptionButton>("Panel/VBoxContainer/HBoxContainer/OptionButton");
         volumeSlider = GetNode<HSlider>("Panel/VBoxContainer/HBoxContainer2/HSlider");
 
-        // aktuální hlasitost v decibelech z hlavního busu 0
+        // --- Hlasitost ---
         float currentDb = AudioServer.GetBusVolumeDb(0);
-        // převedeme zpet na lineární hodnotu 0.0 - 1.0 a pak na 0-100 pro slider
         volumeSlider.Value = Mathf.DbToLinear(currentDb) * 100f;
 
+        // --- Rozlišení ---
         resolutionOption.Clear();
         resolutionOption.AddItem("800x600");
         resolutionOption.AddItem("1280x720");
         resolutionOption.AddItem("1600x900");
         resolutionOption.AddItem("1920x1080");
 
-        // nastaveni správneho indexu v menu podle aktualni velikosti okna
-        Vector2I windowSize = DisplayServer.WindowGetSize();
-        string currentResString = $"{windowSize.X}x{windowSize.Y}";
+        // Získá aktuální rozlišení
+        Vector2I currentRes = GetTree().Root.ContentScaleSize;
 
+        if (currentRes == Vector2I.Zero)
+        {
+            currentRes = DisplayServer.WindowGetSize();
+        }
+
+        string currentResString = $"{currentRes.X}x{currentRes.Y}";
+        GD.Print("Hledám rozlišení: " + currentResString);
+
+        bool found = false;
         for (int i = 0; i < resolutionOption.ItemCount; i++)
         {
             if (resolutionOption.GetItemText(i) == currentResString)
             {
                 resolutionOption.Selected = i;
+                found = true;
                 break;
             }
+        }
+
+        if (!found)
+        {
+            GD.Print("Aktuální rozlišení není v seznamu OptionButton.");
         }
 
         volumeSlider.ValueChanged += OnVolumeChanged;
@@ -45,9 +59,18 @@ public partial class Settings : Control
 
         int width = int.Parse(parts[0]);
         int height = int.Parse(parts[1]);
-        GD.Print(parts[0] + " x " + parts[1]);
+        Vector2I newRes = new Vector2I(width, height);
 
-        DisplayServer.WindowSetSize(new Vector2I(width, height));
+        // Změní velikost fyzického okna
+        DisplayServer.WindowSetSize(newRes);
+
+        GetTree().Root.ContentScaleSize = newRes;
+
+        // Vycentrování okna po změně rozlišení
+        Vector2I screenSize = DisplayServer.ScreenGetSize();
+        DisplayServer.WindowSetPosition(screenSize / 2 - newRes / 2);
+
+        GD.Print($"Resolution changed to: {width}x{height}");
     }
 
     private void OnVolumeChanged(double value)

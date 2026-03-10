@@ -42,20 +42,24 @@ text = "Roguelike 2D dungeons"
 
 [node name="ButtonPlay" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ekxnf")
 theme_override_font_sizes/font_size = 32
 text = "Hrát"
 
 [node name="ButtonSettings" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ekxnf")
 theme_override_font_sizes/font_size = 32
 text = "Nastavení"
 
 [node name="ButtonShop" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ekxnf")
 theme_override_font_sizes/font_size = 32
 text = "Obchod"
 
 [node name="ButtonQuit" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ekxnf")
 theme_override_font_sizes/font_size = 32
 text = "Zavřít"

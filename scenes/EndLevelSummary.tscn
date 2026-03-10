@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dlkv3r6piq43y"]
+[gd_scene load_steps=3 format=3 uid="uid://dlkv3r6piq43y"]
 
 [ext_resource type="Script" uid="uid://b68ygjcpd0psx" path="res://scripts/EndLevelSummary.cs" id="1_a43ji"]
+[ext_resource type="FontFile" uid="uid://c6h8dhb3jcl81" path="res://fonts/Minecraftia-Regular.ttf" id="2_4ru72"]
 
 [node name="EndLevelSummary" type="CanvasLayer"]
 script = ExtResource("1_a43ji")
@@ -35,20 +36,24 @@ grow_vertical = 2
 
 [node name="LabelTime" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_4ru72")
 theme_override_font_sizes/font_size = 40
 horizontal_alignment = 1
 
 [node name="LabelKills" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_4ru72")
 theme_override_font_sizes/font_size = 40
 horizontal_alignment = 1
 
 [node name="LabelGold" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_4ru72")
 theme_override_font_sizes/font_size = 40
 horizontal_alignment = 1
 
 [node name="ButtonNext" type="Button" parent="Panel/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_4ru72")
 theme_override_font_sizes/font_size = 64
 text = "Další level"

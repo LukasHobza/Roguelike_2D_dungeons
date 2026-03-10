@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cpc7a00dgvqmt"]
+[gd_scene load_steps=3 format=3 uid="uid://cpc7a00dgvqmt"]
 
 [ext_resource type="Script" uid="uid://cnodsuugylti8" path="res://scripts/Shop.cs" id="1_rgcs7"]
+[ext_resource type="FontFile" uid="uid://c6h8dhb3jcl81" path="res://fonts/Minecraftia-Regular.ttf" id="2_ec5oe"]
 
 [node name="Shop" type="Control"]
 layout_mode = 3
@@ -25,36 +26,44 @@ grow_vertical = 2
 
 [node name="Gold_Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ec5oe")
 theme_override_font_sizes/font_size = 32
 
 [node name="Hp_Level_Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ec5oe")
 theme_override_font_sizes/font_size = 32
 
 [node name="Buy_HP" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ec5oe")
 theme_override_font_sizes/font_size = 32
 text = "Buy hp"
 
 [node name="Damage_Level_Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ec5oe")
 theme_override_font_sizes/font_size = 32
 
 [node name="Buy_Damage" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ec5oe")
 theme_override_font_sizes/font_size = 32
 text = "Buy damage"
 
 [node name="Defence_Level_Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ec5oe")
 theme_override_font_sizes/font_size = 32
 
 [node name="Buy_Defence" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ec5oe")
 theme_override_font_sizes/font_size = 32
 text = "Buy defence"
 
 [node name="Back" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ec5oe")
 theme_override_font_sizes/font_size = 32
 text = "Back"
