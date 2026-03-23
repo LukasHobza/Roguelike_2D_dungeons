@@ -116,6 +116,7 @@ public partial class MazeGenerator : Node2D
             item.QueueFree();
 
         PlacePlayer();
+        if (player is Player p) p.MakeInvulnerable(0.5f);
 
         if (IsBossLevel())
         {

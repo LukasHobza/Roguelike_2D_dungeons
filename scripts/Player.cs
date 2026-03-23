@@ -36,6 +36,13 @@ public partial class Player : CharacterBody2D
     private AudioStreamPlayer attackSound;
     private AudioStreamPlayer hurtSound;
 
+
+    public void MakeInvulnerable(float duration)
+    {
+        isInvulnerable = true;
+        // po uplynuti casu nesmrtelnost vypne
+        GetTree().CreateTimer(duration).Timeout += () => isInvulnerable = false;
+    }
     //
     public override void _Ready()
 	{
