@@ -6,7 +6,7 @@ public partial class MainMenu : Control
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		//tlacitka
+        // nacteni tlacitka pro start
         var ButtonStart = GetNode<Button>("CenterContainer/VBoxContainer/ButtonPlay");
         var ButtonQuit = GetNode<Button>("CenterContainer/VBoxContainer/ButtonQuit");
         var ButtonSettings = GetNode<Button>("CenterContainer/VBoxContainer/ButtonSettings");
@@ -36,11 +36,13 @@ public partial class MainMenu : Control
     private void OnQuitPressed()
     {
         GD.Print("quit");
+        // ukonceni aplikace
         GetTree().Quit();
     }
 
     private void OnShopPressed()
     {
+        // prepnuti do sceny obchodu
         GetTree().ChangeSceneToFile("res://scenes/Shop.tscn");
     }
 }

@@ -8,15 +8,19 @@ public partial class ItemPickup : Area2D
 
     public override void _Ready()
     {
+        // prida objekt do skupiny pro identifikaci
         AddToGroup("ground_item");
 
+        // najde uzel sprite v detech
         sprite = GetNode<Sprite2D>("Sprite2D");
 
         if (ItemData != null && ItemData.Icon != null)
         {
+            // nastavi sprite podle ikony predmetu
             sprite.Texture = ItemData.Icon;
         }
 
+        // pripoji signal pro detekci kolize
         BodyEntered += OnBodyEntered;
 
         GD.Print("ItemPickup ready");
@@ -24,6 +28,7 @@ public partial class ItemPickup : Area2D
 
     private void OnBodyEntered(Node body)
     {
+        // kontrola zda do objektu vesel hrac
         if (body is Player player)
         {
             if (ItemData == null)

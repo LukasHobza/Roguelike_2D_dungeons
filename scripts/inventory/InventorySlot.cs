@@ -1,4 +1,5 @@
 using Godot;
+using static System.Formats.Asn1.AsnWriter;
 
 public partial class InventorySlot : Panel
 {
@@ -25,17 +26,23 @@ public partial class InventorySlot : Panel
         UpdateSlot();
     }
 
-    //Aktualizace UI
+    // metoda pro prekresleni slotu
     private void UpdateSlot()
     {
+        // kontrola zda item i ikona existuji
         if (Item != null && Item.Icon != null)
         {
+            // nastavi texturu z dat itemu
             icon.Texture = Item.Icon;
+            // zobrazi uzel ikony
             icon.Visible = true;
         }
+        // pokud je slot prazdny
         else
         {
+            // odstrani texturu z uzlu
             icon.Texture = null;
+            // skryje uzel ikony
             icon.Visible = false;
         }
     }
@@ -49,8 +56,10 @@ public partial class InventorySlot : Panel
     //Kliknutí myší na slot
     public override void _GuiInput(InputEvent @event)
     {
+        // overeni zda jde o kliknuti tlacitkem mysi
         if (@event is InputEventMouseButton mouseEvent && mouseEvent.Pressed)
         {
+            // kontrola zda bylo stisknuto leve tlacitko
             if (mouseEvent.ButtonIndex == MouseButton.Left)
             {
                 UseItem();
@@ -66,12 +75,14 @@ public partial class InventorySlot : Panel
     {
         if (Item == null) return;
 
+        // najde hrace podle skupiny ve scene
         var player = GetTree().GetFirstNodeInGroup("player") as Player;
         if (player == null) return;
 
-        // Pokud je to equipnutá zbraň  unequip
+        // kontrola zda jde o zbran
         if (Item is Weapon weapon)
         {
+            // pokud ma hrac tuhle zbran v ruce
             if (player.EquippedWeapon == weapon)
             {
                 player.UnequipWeapon();
@@ -84,23 +95,26 @@ public partial class InventorySlot : Panel
                 player.UnequipArmor();
             }
         }
-
-
-
         SpawnPickup(Item);
         Clear();
     }
 
     private void SpawnPickup(Item item)
     {
+        // nacteni sceny pro vyhozeny predmet
         var pickupScene = GD.Load<PackedScene>("res://scenes/item_pickup.tscn");
+        // vytvoreni instance teto sceny
         var pickup = pickupScene.Instantiate<ItemPickup>();
 
+        // prirazeni dat itemu do noveho objektu
         pickup.ItemData = item;
 
+        // najde hrace pro urceni pozice vyhozeni
         var player = GetTree().GetFirstNodeInGroup("player") as Player;
+        // nastavi pozici pod hrace s malym posunem
         pickup.GlobalPosition = player.GlobalPosition + new Vector2(0, 32);
 
+        // prida objekt do aktualni spustene sceny
         GetTree().CurrentScene.AddChild(pickup);
     }
 

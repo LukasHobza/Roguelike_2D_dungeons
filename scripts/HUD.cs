@@ -3,6 +3,7 @@ using System;
 
 public partial class HUD : CanvasLayer
 {
+    // deklarace popisku pro ruzne statistiky
     private Label LabelHP;
     private Label LabelStamina;
     private Label LabelGold;
@@ -11,24 +12,21 @@ public partial class HUD : CanvasLayer
     private Label LabelSet;
 
     // Called when the node enters the scene tree for the first time.
+    // inicializace pri nacteni do sceny
     public override void _Ready()
     {
+        // najde a ulozi uzel pro zivoty
         LabelHP = GetNode<Label>("VBoxContainer/LabelHP");
-        LabelStamina = GetNode<Label>("VBoxContainer/LabelStamina");
         LabelGold = GetNode<Label>("VBoxContainer/LabelGold");
         LabelDamage = GetNode<Label>("VBoxContainer/LabelDamage");
         LabelDefence = GetNode<Label>("VBoxContainer/LabelDefence");
         LabelSet = GetNode<Label>("VBoxContainer/LabelSet");
     }
 
+    // aktualizace textu zivotu
     public void SetHP(int currentHP, int maxHP)
     {
         LabelHP.Text = "Životy: " + currentHP.ToString() + " / " + maxHP.ToString();
-    }
-
-    public void SetStamina(int currentStamina)
-    {
-        LabelStamina.Text = "Výdrž: " + currentStamina.ToString();
     }
 
     public void SetGold(int gold)
@@ -52,8 +50,10 @@ public partial class HUD : CanvasLayer
         else LabelSet.Text = "Set bonus: 1*";        
     }
 
+    // obsluha tlacitka pro navrat
     private void _on_button_pressed()
     {
-        GetTree().ChangeSceneToFile("res://scenes/main_menu.tscn");
+        // prepne scenu na hlavni menu
+        GetTree().ChangeSceneToFile("res://scenes/Main_menu.tscn");
     }
 }

@@ -18,14 +18,18 @@ public partial class Enemy : CharacterBody2D
     private bool isPlayerInRange = false;
     private Player playerToDamage;
 
+    // signal pri smrti
     [Signal]
     public delegate void EnemyDiedEventHandler(Enemy enemy);
 
     public override void _Ready()
     {
+        // pridani do skupiny nepratel
         AddToGroup("enemy");
 
+        // najde hrace v hlavni scene
         player = GetTree().GetRoot().GetNode<Node2D>("Main/Player");
+        // najde uzel pro animace
         sprite = GetNodeOrNull<AnimatedSprite2D>("AnimatedSprite2D");
         CurrentHP = MaxHP;
     }
@@ -34,15 +38,18 @@ public partial class Enemy : CharacterBody2D
     {
         if (player == null) return;
 
+        // smer k hraci
         var direction = player.GlobalPosition - GlobalPosition;
 
         // zabrani pronikani do hrace
         if (direction.Length() > 10)
         {
+            // pohyb smerem k hraci
             Velocity = direction.Normalized() * Speed;
         }
         else
         {
+            // zastavi se
             Velocity = Vector2.Zero;
         }
 
@@ -53,11 +60,15 @@ public partial class Enemy : CharacterBody2D
         //veci pro opakovany utok
         if (isPlayerInRange && playerToDamage != null)
         {
+            // pricitani casu
             attackTimer += (float)delta;
+            // pokud vyprsel cooldown
             if (attackTimer >= AttackCooldown)
             {
+                // udeli poskozeni hraci
                 playerToDamage.TakeDamage(Damage);
                 GD.Print($"{GetType().Name} bit the player again for {Damage}!");
+                // vynulovani casovace
                 attackTimer = 0.0f; // reset casovace
             }
         }
@@ -68,6 +79,7 @@ public partial class Enemy : CharacterBody2D
     {
         if (sprite == null) return;
 
+        // pokud je pohyb vic do stran nez nahoru/dolu
         if (Mathf.Abs(direction.X) > Mathf.Abs(direction.Y))
         {
             sprite.Play("walk_right");
@@ -87,13 +99,17 @@ public partial class Enemy : CharacterBody2D
 
     protected virtual void _on_attack_area_body_entered(Node2D body)
     {
+        // je to hrac
         if (body is Player p)
         {
+            // hrac je v dosahu
             isPlayerInRange = true;
+            // ulozeni odkazu na hrace
             playerToDamage = p;
 
             // prvni utok hned pri doteku
             p.TakeDamage(Damage);
+            // reset casovace pro dalsi utok
             attackTimer = 0.0f;
             GD.Print($"{GetType().Name} dealt initial {Damage} damage!");
         }
@@ -101,6 +117,7 @@ public partial class Enemy : CharacterBody2D
 
     protected virtual void _on_attack_area_body_exited(Node2D body)
     {
+        // odchazi hrac
         if (body is Player)
         {
             isPlayerInRange = false;
@@ -108,19 +125,6 @@ public partial class Enemy : CharacterBody2D
             attackTimer = 0.0f;
         }
     }
-
-
-    /*
-    // zásah hráče
-    protected virtual void _on_attack_area_body_entered(Node2D body)
-    {
-        if (body is Player player)
-        {
-            player.TakeDamage(Damage);
-            GD.Print($"{GetType().Name} dealt {Damage} damage!");//GetType().Name nazev tridy aktualniho objektu
-        }
-    }
-    */
 
     // poškození od hráče
     public virtual void TakeDamage(int amount)
@@ -134,19 +138,25 @@ public partial class Enemy : CharacterBody2D
 
     protected virtual void Die()
     {
+        // nacteni globalnich statistik
         RunStats stats = GetNode<RunStats>("/root/RunStats");
+        // zapocteni zabiti
         stats.RegisterKill();
 
+        // najde hrace
         var player = GetTree().GetFirstNodeInGroup("player") as Player;
         if (player != null)
         {
+            // prida hraci zlato
             player.AddGold(1);
         }
 
+        // odesle signal o smrti
         EmitSignal(SignalName.EnemyDied, this);
 
 
         GD.Print($"{GetType().Name} died!");
+        // odstrani nepritele ze scen
         QueueFree();
     }
 }

@@ -39,11 +39,12 @@ public partial class Player : CharacterBody2D
     //
     public override void _Ready()
 	{
+        // nacteni databaze a zlata
         var db = GetNode<GameDatabase>("/root/GameDatabase");
         Gold = db.LoadGold();
         GD.Print("Loaded gold: ", Gold);
 
-        //upgrady z shopu
+        // aplikace vylepseni z obchodu
         int hpLvl = db.GetHpLevel();
         int dmgLvl = db.GetDamageLevel();
         int defLvl = db.GetDefenceLevel();
@@ -52,8 +53,10 @@ public partial class Player : CharacterBody2D
         BaseDamage += dmgLvl * 2;
         BaseDefence += defLvl * 1;
 
+        // nalezeni inventare
         Inventory = GetTree().GetFirstNodeInGroup("inventory") as Inventory;
 
+        // prirazeni uzlu
         sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
         weapon = GetNode<Sprite2D>("Weapon");
         attackArea = GetNode<Area2D>("AttackArea");
@@ -61,8 +64,10 @@ public partial class Player : CharacterBody2D
         weapon.Visible = false;
         attackArea.Monitoring = false;//Objekt aktivně sleduje kolize / vstupy
 
+        // vychozi animace
         sprite.Play("idle_right");
 
+        // nastaveni zakladnich statistik
         Defence = BaseDefence;
         Damage = BaseDamage;
 
@@ -74,9 +79,11 @@ public partial class Player : CharacterBody2D
         CurrentHP = MaxHP;
         UpdateHUD();
 
+        // docasna nesmrtelnost po startu
         GetTree().CreateTimer(1.0f).Timeout += () => isInvulnerable = false;
     }
 
+    // pridani zlata a ulozeni
     public void AddGold(int amount)
     {
         Gold += amount;
@@ -90,7 +97,7 @@ public partial class Player : CharacterBody2D
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _PhysicsProcess(double delta)
     {
-        // --- INPUT ---
+        // ziskani smeru z klavesnice
         Vector2 input = Input.GetVector(
             "move_left",
             "move_right",
@@ -98,7 +105,7 @@ public partial class Player : CharacterBody2D
             "move_down"
         );
 
-        // --- POHYB ---
+        // reseni pohybu pri utoku
         if (isAttacking)
         {
             Velocity = Vector2.Zero;
@@ -113,11 +120,12 @@ public partial class Player : CharacterBody2D
 
         MoveAndSlide();
 
-        // --- ANIMACE ---
+        // logika animaci pohybu a stani
         if (!isAttacking)
         {
             if (input == Vector2.Zero)
             {
+                // idle animace podle posledniho smeru
                 if (Math.Abs(facingDirection.X) > Math.Abs(facingDirection.Y))
                 {
                     sprite.Play("idle_right");
@@ -136,6 +144,7 @@ public partial class Player : CharacterBody2D
             }
             else
             {
+                // walk animace podle vstupu
                 if (Math.Abs(input.X) > Math.Abs(input.Y))
                 {
                     sprite.Play("walk_right");
@@ -154,12 +163,12 @@ public partial class Player : CharacterBody2D
             }
         }
 
-        // --- UTOK ---
+        // kontrola stisku tlacitka pro utok
         if (Input.IsActionJustPressed("attack") && !isAttacking)
             Attack();
     }
 
-
+    // detekce zasahu nepritele
     private void _on_attack_area_body_entered(Node2D body)
     {
         if (body is Enemy enemy)
@@ -219,9 +228,10 @@ public partial class Player : CharacterBody2D
             sprite.Play("attack_right");
         }
 
+        // delka trvani utoku
         await ToSignal(GetTree().CreateTimer(0.40f), "timeout");
 
-
+        // reset stavu po utoku
         weapon.Visible = false;
         attackArea.Monitoring = false;
         isAttacking = false;
@@ -234,6 +244,7 @@ public partial class Player : CharacterBody2D
     {
         if (isInvulnerable) return;
 
+        // vypocet damage po zapocteni obrany
         int damage = Mathf.Max(amount - Defence, 0);
         CurrentHP -= damage;
 
@@ -242,6 +253,7 @@ public partial class Player : CharacterBody2D
         if (CurrentHP < 0) CurrentHP = 0;
         UpdateHUD();
 
+        // smrt hrace
         if (CurrentHP == 0)
         {
             GetTree().ChangeSceneToFile("res://scenes/main_menu.tscn");
@@ -249,6 +261,7 @@ public partial class Player : CharacterBody2D
         }
     }
 
+    // aktualizace grafiky hud
     private void UpdateHUD()
     {
         var hud = GetTree().GetRoot().GetNode<HUD>("Main/UI/HUD");
@@ -329,5 +342,4 @@ public partial class Player : CharacterBody2D
 
         UpdateHUD();
     }
-
 }
