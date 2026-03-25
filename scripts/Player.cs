@@ -263,7 +263,7 @@ public partial class Player : CharacterBody2D
         // smrt hrace
         if (CurrentHP == 0)
         {
-            GetTree().ChangeSceneToFile("res://scenes/main_menu.tscn");
+            GetTree().ChangeSceneToFile("res://scenes/Main_menu.tscn");
             GD.Print("Player died!");
         }
     }
